@@ -1,0 +1,182 @@
+/* ===== HERO ===== */
+.hero {
+  padding-top: 140px;
+  padding-bottom: 80px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroKonten {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  max-width: 680px;
+}
+
+.judulHero {
+  font-family: var(--font-judul);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 900;
+  color: var(--hijau-tua);
+  line-height: 1.15;
+}
+
+.aksen {
+  color: var(--hijau-muda);
+}
+
+.subjudulHero {
+  font-size: 1.1rem;
+  color: var(--teks-abu);
+  max-width: 540px;
+  line-height: 1.75;
+}
+
+.tombolGrup {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Dekorasi */
+.dekorasi {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+}
+
+.lingkaranBesar {
+  width: 660px;
+  height: 660px;
+  background: radial-gradient(circle, rgba(82, 183, 136, 0.18) 0%, transparent 70%);
+  top: -140px;
+  right: -160px;
+}
+
+.lingkaranKecil {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(233, 196, 106, 0.2) 0%, transparent 70%);
+  bottom: 40px;
+  left: -80px;
+}
+
+/* ===== STATISTIK ===== */
+.seksiStat {
+  padding: 48px 0;
+  background: var(--hijau-tua);
+}
+
+.gridStat {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  text-align: center;
+}
+
+.kartuStat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.kartuStat:last-child {
+  border-right: none;
+}
+
+.angkaStat {
+  font-family: var(--font-judul);
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--hijau-muda);
+}
+
+.labelStat {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+/* ===== FITUR ===== */
+.gridFitur {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.kartuFitur {
+  background: var(--putih);
+  border: 1px solid var(--krem-gelap);
+  border-radius: var(--radius-besar);
+  padding: 36px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.kartuFitur:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(26, 58, 42, 0.1);
+}
+
+.ikonFitur {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.judulFitur {
+  font-family: var(--font-judul);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--hijau-tua);
+  margin-bottom: 10px;
+}
+
+.deskripsiFitur {
+  font-size: 0.95rem;
+  color: var(--teks-abu);
+  line-height: 1.7;
+}
+
+/* ===== CTA ===== */
+.seksiCta {
+  background: var(--krem-gelap);
+}
+
+.kotakCta {
+  background: var(--hijau-tua);
+  border-radius: var(--radius-besar);
+  padding: 72px 56px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.judulCta {
+  font-family: var(--font-judul);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: #fff;
+}
+
+.subCta {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1rem;
+  max-width: 480px;
+}
+
+@media (max-width: 768px) {
+  .gridStat { grid-template-columns: repeat(2, 1fr); }
+  .kartuStat { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+  .gridFitur { grid-template-columns: 1fr; }
+  .kotakCta { padding: 48px 28px; }
+}

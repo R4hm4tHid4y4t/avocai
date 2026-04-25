@@ -1,0 +1,143 @@
+.headerHalaman {
+  padding-top: 140px;
+  padding-bottom: 64px;
+  background: linear-gradient(160deg, var(--krem) 60%, rgba(82, 183, 136, 0.08));
+}
+
+.badgeKategori {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+/* Artikel unggulan */
+.kartuUnggulan {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+  background: var(--putih);
+  border: 1px solid var(--krem-gelap);
+  border-radius: var(--radius-besar);
+  padding: 40px;
+  margin-bottom: 32px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.kartuUnggulan:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(26, 58, 42, 0.1);
+}
+
+.infoUnggulan {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.judulUnggulan {
+  font-family: var(--font-judul);
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--hijau-tua);
+  line-height: 1.3;
+}
+
+.ringkasanUnggulan {
+  font-size: 0.95rem;
+  color: var(--teks-abu);
+  line-height: 1.7;
+  max-width: 580px;
+}
+
+.metaArtikel {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  color: var(--teks-abu);
+}
+
+.gambarkUnggulan {
+  width: 120px;
+  height: 120px;
+  background: rgba(82, 183, 136, 0.1);
+  border-radius: var(--radius-besar);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  flex-shrink: 0;
+}
+
+/* Grid artikel */
+.gridArtikel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.kartuArtikel {
+  background: var(--putih);
+  border: 1px solid var(--krem-gelap);
+  border-radius: var(--radius-besar);
+  padding: 28px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.kartuArtikel:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(26, 58, 42, 0.1);
+}
+
+.headerKartu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.waktuBaca {
+  font-size: 0.78rem;
+  color: var(--teks-abu);
+}
+
+.judulArtikel {
+  font-family: var(--font-judul);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--hijau-tua);
+  line-height: 1.35;
+}
+
+.ringkasanArtikel {
+  font-size: 0.88rem;
+  color: var(--teks-abu);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.footerKartu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--teks-abu);
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px solid var(--krem-gelap);
+}
+
+@media (max-width: 768px) {
+  .kartuUnggulan { grid-template-columns: 1fr; }
+  .gambarkUnggulan { display: none; }
+  .gridArtikel { grid-template-columns: 1fr; }
+}

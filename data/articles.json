@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "slug": "cara-kerja-ai-klasifikasi-alpukat",
+    "judul": "Bagaimana AI Kami Mengklasifikasikan Kematangan Alpukat",
+    "ringkasan": "Pelajari teknologi di balik model machine learning AvocAI yang mampu mendeteksi 4 tingkat kematangan alpukat dengan akurasi 96%.",
+    "konten": "Model kami dilatih menggunakan lebih dari 50.000 gambar alpukat dari berbagai varietas dan kondisi pencahayaan. Proses pelatihan melibatkan augmentasi data, transfer learning dari arsitektur EfficientNet, dan fine-tuning khusus untuk ciri visual alpukat Indonesia. Hasilnya adalah model yang ringan, cepat, dan akurat bahkan pada kondisi lapangan yang tidak ideal. Setiap inferensi memakan waktu kurang dari 200ms, sehingga cocok diintegrasikan ke dalam lini produksi real-time.",
+    "tanggal": "12 Maret 2026",
+    "kategori": "Teknologi",
+    "penulis": "Tim R&D AvocAI",
+    "waktuBaca": "5 menit"
+  },
+  {
+    "id": 2,
+    "slug": "manfaat-grading-otomatis-untuk-petani",
+    "judul": "5 Manfaat Nyata Grading Otomatis bagi Petani Alpukat",
+    "ringkasan": "Dari pengurangan waste hingga negosiasi harga yang lebih baik, sistem grading digital membawa perubahan konkret di lahan.",
+    "konten": "Petani alpukat di Jawa Tengah yang sudah menggunakan AvocAI rata-rata melaporkan pengurangan pemborosan panen sebesar 23% dalam tiga bulan pertama. Dengan data kematangan yang akurat, mereka bisa menentukan waktu panen yang tepat, mengurangi alpukat yang terlalu masak saat tiba di distributor, dan menetapkan harga jual yang lebih kompetitif. Sistem ini juga membantu petani memilah produk untuk pasar ekspor versus pasar lokal secara efisien.",
+    "tanggal": "28 Februari 2026",
+    "kategori": "Pertanian",
+    "penulis": "Sari Utami",
+    "waktuBaca": "4 menit"
+  },
+  {
+    "id": 3,
+    "slug": "integrasi-avocai-dengan-sistem-warehouse",
+    "judul": "Panduan Integrasi AvocAI dengan Sistem Warehouse Modern",
+    "ringkasan": "Langkah demi langkah menghubungkan API AvocAI ke WMS atau ERP yang sudah berjalan di gudang Anda.",
+    "konten": "API AvocAI menggunakan standar REST dengan autentikasi Bearer Token. Setiap request mengirimkan gambar dalam format base64 atau multipart/form-data, dan respons JSON dikembalikan dalam waktu rata-rata 180ms. Panduan ini mencakup cara setup webhook untuk notifikasi real-time, cara menyimpan riwayat klasifikasi ke database lokal, dan cara menangani error saat koneksi terputus. Sudah tersedia SDK untuk Node.js, Python, dan PHP.",
+    "tanggal": "10 Februari 2026",
+    "kategori": "Developer",
+    "penulis": "Bima Hendra",
+    "waktuBaca": "7 menit"
+  },
+  {
+    "id": 4,
+    "slug": "studi-kasus-tanidigital",
+    "judul": "Studi Kasus: TaniDigital Kurangi Waste 30% dengan AvocAI",
+    "ringkasan": "Bagaimana startup agritech TaniDigital berhasil mengoptimalkan distribusi alpukat ke 12 kota menggunakan platform kami.",
+    "konten": "TaniDigital mulai menggunakan AvocAI pada Q3 2025 untuk 3 gudang distribusinya di Jawa. Dalam 6 bulan, mereka mencatat penurunan complaint dari retailer sebesar 41%, peningkatan kecepatan proses grading dari 2 jam menjadi 20 menit per batch, dan efisiensi biaya tenaga kerja grading sebesar 35%. CEO TaniDigital menyebutkan bahwa integrasi berlangsung dalam satu hari kerja berkat dokumentasi API yang lengkap.",
+    "tanggal": "5 Januari 2026",
+    "kategori": "Studi Kasus",
+    "penulis": "Tim AvocAI",
+    "waktuBaca": "6 menit"
+  }
+]

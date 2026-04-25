@@ -1,0 +1,127 @@
+.headerHalaman {
+  padding-top: 140px;
+  padding-bottom: 64px;
+  background: linear-gradient(160deg, var(--krem) 60%, rgba(82, 183, 136, 0.08));
+}
+
+.gridCerita {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.tekscerita p {
+  color: var(--teks-abu);
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.kotakVisi {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.itemVisi {
+  background: var(--putih);
+  border: 1px solid var(--krem-gelap);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.itemVisi h3 {
+  font-family: var(--font-judul);
+  font-size: 1.1rem;
+  color: var(--hijau-tua);
+  margin-bottom: 8px;
+}
+
+.itemVisi p {
+  color: var(--teks-abu);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.gridNilai {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.kartuNilai {
+  background: var(--putih);
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+}
+
+.ikonNilai {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 14px;
+}
+
+.judulNilai {
+  font-family: var(--font-judul);
+  font-size: 1.1rem;
+  color: var(--hijau-tua);
+  margin-bottom: 8px;
+}
+
+.deskripsiNilai {
+  color: var(--teks-abu);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.gridTim {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.kartuTim {
+  background: var(--putih);
+  border: 1px solid var(--krem-gelap);
+  border-radius: var(--radius-besar);
+  padding: 32px 24px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kartuTim:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(26, 58, 42, 0.1);
+}
+
+.avatarTim {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 auto 16px;
+}
+
+.namaTim {
+  font-family: var(--font-judul);
+  font-size: 1.05rem;
+  color: var(--hijau-tua);
+  margin-bottom: 4px;
+}
+
+.peranTim {
+  font-size: 0.85rem;
+  color: var(--teks-abu);
+}
+
+@media (max-width: 768px) {
+  .gridCerita { grid-template-columns: 1fr; gap: 32px; }
+  .gridNilai { grid-template-columns: 1fr; }
+  .gridTim { grid-template-columns: repeat(2, 1fr); }
+}

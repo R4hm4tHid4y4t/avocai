@@ -1,0 +1,120 @@
+.headerHalaman {
+  padding-top: 140px;
+  padding-bottom: 64px;
+  background: linear-gradient(160deg, var(--krem) 60%, rgba(82, 183, 136, 0.08));
+}
+
+.layoutKontak {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 56px;
+  align-items: start;
+}
+
+/* Sisi kiri */
+.sisiInfo {}
+
+.judulInfo {
+  font-family: var(--font-judul);
+  font-size: 1.4rem;
+  color: var(--hijau-tua);
+  margin-bottom: 8px;
+}
+
+.subInfo {
+  font-size: 0.95rem;
+  color: var(--teks-abu);
+  margin-bottom: 32px;
+}
+
+.daftarInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.itemInfo {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.ikonInfo {
+  font-size: 1.3rem;
+  margin-top: 2px;
+}
+
+.judulItem {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--teks-abu);
+  margin-bottom: 2px;
+}
+
+.nilaiItem {
+  font-size: 0.95rem;
+  color: var(--teks-gelap);
+  font-weight: 500;
+}
+
+.kotakFaq {
+  background: var(--krem-gelap);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.judulFaq {
+  font-family: var(--font-judul);
+  font-size: 1rem;
+  color: var(--hijau-tua);
+  margin-bottom: 14px;
+}
+
+.tanyaFaq {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--teks-gelap);
+  margin-bottom: 4px;
+  margin-top: 14px;
+}
+
+.tanyaFaq:first-of-type {
+  margin-top: 0;
+}
+
+.jawaFaq {
+  font-size: 0.875rem;
+  color: var(--teks-abu);
+  line-height: 1.6;
+}
+
+/* Sisi kanan — form */
+.sisiForm {}
+
+.kartuForm {
+  background: var(--putih);
+  border: 1px solid var(--krem-gelap);
+  border-radius: var(--radius-besar);
+  padding: 48px;
+}
+
+.judulForm {
+  font-family: var(--font-judul);
+  font-size: 1.5rem;
+  color: var(--hijau-tua);
+  margin-bottom: 6px;
+}
+
+.subForm {
+  font-size: 0.95rem;
+  color: var(--teks-abu);
+  margin-bottom: 32px;
+}
+
+@media (max-width: 768px) {
+  .layoutKontak { grid-template-columns: 1fr; gap: 40px; }
+  .kartuForm { padding: 28px 20px; }
+}

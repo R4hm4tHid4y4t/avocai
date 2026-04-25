@@ -1,0 +1,168 @@
+.headerHalaman {
+  padding-top: 140px;
+  padding-bottom: 64px;
+  background: linear-gradient(160deg, var(--krem) 60%, rgba(82, 183, 136, 0.08));
+}
+
+.gridLayanan {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.kartuLayanan {
+  background: var(--putih);
+  border: 1px solid var(--krem-gelap);
+  border-radius: var(--radius-besar);
+  padding: 36px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.kartuLayanan:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(26, 58, 42, 0.1);
+}
+
+.ikonLayanan {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.judulLayanan {
+  font-family: var(--font-judul);
+  font-size: 1.2rem;
+  color: var(--hijau-tua);
+  margin-bottom: 10px;
+}
+
+.deskripsiLayanan {
+  color: var(--teks-abu);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* ===== HARGA ===== */
+.gridHarga {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.kartuHarga {
+  background: var(--putih);
+  border: 1px solid var(--krem-gelap);
+  border-radius: var(--radius-besar);
+  padding: 36px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.populer {
+  border-color: var(--hijau-muda);
+  box-shadow: 0 0 0 2px rgba(82, 183, 136, 0.3), 0 20px 48px rgba(26, 58, 42, 0.12);
+  transform: translateY(-8px);
+}
+
+.labelPopuler {
+  display: inline-block;
+  background: var(--hijau-tua);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+  width: fit-content;
+}
+
+.namaPaket {
+  font-family: var(--font-judul);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--hijau-tua);
+}
+
+.hargaNominal {
+  font-family: var(--font-judul);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--hijau-tua);
+  margin-top: 8px;
+}
+
+.hargaPeriode {
+  font-size: 0.85rem;
+  color: var(--teks-abu);
+}
+
+.garisPembatas {
+  border: none;
+  border-top: 1px solid var(--krem-gelap);
+  margin: 16px 0;
+}
+
+.daftarFiturHarga {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex: 1;
+}
+
+.daftarFiturHarga li {
+  font-size: 0.9rem;
+  color: var(--teks-abu);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.centang {
+  color: var(--hijau-muda);
+  font-weight: 700;
+}
+
+.tombolPilih {
+  display: block;
+  text-align: center;
+  padding: 13px;
+  border-radius: 999px;
+  border: 2px solid var(--hijau-tua);
+  color: var(--hijau-tua);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tombolPilih:hover {
+  background: var(--hijau-tua);
+  color: #fff;
+}
+
+.tombolPilihPopuler {
+  display: block;
+  text-align: center;
+  padding: 13px;
+  border-radius: 999px;
+  background: var(--hijau-tua);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.tombolPilihPopuler:hover {
+  opacity: 0.88;
+}
+
+@media (max-width: 768px) {
+  .gridLayanan { grid-template-columns: 1fr; }
+  .gridHarga { grid-template-columns: 1fr; }
+  .populer { transform: none; }
+}

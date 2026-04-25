@@ -1,0 +1,142 @@
+.wrapper {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 140px 24px 80px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--teks-abu);
+  margin-bottom: 32px;
+}
+
+.breadcrumb a {
+  color: var(--teks-abu);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+  color: var(--hijau-tua);
+}
+
+.headerArtikel {
+  margin-bottom: 40px;
+}
+
+.badgeKategori {
+  display: inline-block;
+  background: rgba(82, 183, 136, 0.12);
+  color: var(--hijau-sedang);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.judulArtikel {
+  font-family: var(--font-judul);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 900;
+  color: var(--hijau-tua);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.ringkasan {
+  font-size: 1.05rem;
+  color: var(--teks-abu);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.metaArtikel {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--teks-abu);
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--krem-gelap);
+}
+
+.kontenArtikel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 56px;
+}
+
+.kontenArtikel p {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--teks-gelap);
+}
+
+/* Artikel terkait */
+.artikelTerkait {
+  border-top: 1px solid var(--krem-gelap);
+  padding-top: 48px;
+  margin-bottom: 40px;
+}
+
+.judulTerkait {
+  font-family: var(--font-judul);
+  font-size: 1.3rem;
+  color: var(--hijau-tua);
+  margin-bottom: 20px;
+}
+
+.gridTerkait {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.kartuTerkait {
+  background: var(--putih);
+  border: 1px solid var(--krem-gelap);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.kartuTerkait:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 58, 42, 0.08);
+}
+
+.kategoriKecil {
+  font-size: 0.75rem;
+  color: var(--hijau-sedang);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.judulKartuTerkait {
+  font-family: var(--font-judul);
+  font-size: 0.95rem;
+  color: var(--hijau-tua);
+  line-height: 1.35;
+}
+
+.waktuBaca {
+  font-size: 0.78rem;
+  color: var(--teks-abu);
+}
+
+.tombolKembali {
+  display: flex;
+}
