@@ -1,81 +1,79 @@
-import ContactForm from '@/components/ContactForm';
-import styles from './contact.module.css';
+// app/contact/page.js
+import styles from "./contact.module.css"; //[cite: 14]
+import ContactForm from "./contact-form";
 
 export const metadata = {
-  title: 'Kontak',
-  description: 'Hubungi tim AvocAI — kami siap membantu Anda memulai atau menjawab pertanyaan.',
+  title: "Kontak | AvocAI",
+  description: "Hubungi tim AvocAI untuk pertanyaan, demo, atau integrasi enterprise.",
 };
 
-const infoKontak = [
-  { ikon: '📧', judul: 'Email', nilai: 'halo@avocai.id' },
-  { ikon: '📱', judul: 'WhatsApp', nilai: '+62 812-3456-7890' },
-  { ikon: '📍', judul: 'Kantor', nilai: 'Jakarta Selatan, Indonesia' },
-  { ikon: '🕐', judul: 'Jam Kerja', nilai: 'Sen – Jum, 09.00 – 18.00 WIB' },
-];
-
-// Server Component — hanya ContactForm-nya yang Client Component
-export default function HalamanKontak() {
+export default function ContactPage() {
   return (
-    <>
-      {/* Header */}
-      <section className={styles.headerHalaman}>
+    <main className={styles.halaman}> {/* Menggunakan class dari CSS Module[cite: 14] */}
+      {/* Hero Section */}
+      <section className={styles.hero}>
         <div className="container">
-          <span className="badge">📬 Hubungi Kami</span>
-          <h1 className="judul-seksi" style={{ marginTop: 12 }}>
-            Ada yang Bisa Kami Bantu?
-          </h1>
-          <p className="subjudul-seksi" style={{ marginTop: 12 }}>
-            Baik Anda ingin memulai uji coba, bertanya soal fitur, atau mendiskusikan integrasi
-            enterprise — tim kami siap menjawab.
+          <span className={styles.badge}>📞 HUBUNGI KAMI</span>
+          <h1 className={styles.judul}>Ada yang Bisa Kami Bantu?</h1>
+          <p className={styles.subjudul}>
+            Baik Anda ingin memulai uji coba, bertanya soal fitur, atau
+            mendiskusikan integrasi enterprise — tim kami siap menjawab.
           </p>
         </div>
       </section>
 
-      {/* Konten utama */}
-      <section>
-        <div className="container">
-          <div className={styles.layoutKontak}>
+      {/* Content Section */}
+      <section className={styles.konten}>
+        <div className={styles.grid}>
+          {/* Info Kontak Panel */}
+          <div className={styles.infoPanel}>
+            <div>
+              <h2 className={styles.infoJudul}>Informasi Kontak</h2>
+              <p className={styles.infoSub}>Kami biasanya merespons dalam 1×24 jam di hari kerja.</p>
+            </div>
 
-            {/* Informasi kontak — Server Component */}
-            <aside className={styles.sisiInfo}>
-              <h2 className={styles.judulInfo}>Informasi Kontak</h2>
-              <p className={styles.subInfo}>
-                Kami biasanya merespons dalam 1×24 jam di hari kerja.
-              </p>
-
-              <div className={styles.daftarInfo}>
-                {infoKontak.map((info) => (
-                  <div key={info.judul} className={styles.itemInfo}>
-                    <span className={styles.ikonInfo}>{info.ikon}</span>
-                    <div>
-                      <p className={styles.judulItem}>{info.judul}</p>
-                      <p className={styles.nilaiItem}>{info.nilai}</p>
-                    </div>
-                  </div>
-                ))}
+            <div className={styles.infoList}>
+              <div className={styles.infoItem}>
+                <div className={styles.infoIcon}>✉️</div>
+                <div>
+                  <p className={styles.infoLabel}>EMAIL</p>
+                  <p className={styles.infoNilai}>halo@avocai.id</p>
+                </div>
               </div>
 
-              <div className={styles.kotakFaq}>
-                <h3 className={styles.judulFaq}>Pertanyaan Umum</h3>
-                <p className={styles.tanyaFaq}>Apakah ada uji coba gratis?</p>
-                <p className={styles.jawaFaq}>Ya! Semua paket tersedia uji coba gratis 14 hari tanpa kartu kredit.</p>
-                <p className={styles.tanyaFaq}>Bagaimana cara integrasi API?</p>
-                <p className={styles.jawaFaq}>Dokumentasi lengkap tersedia. Tim kami juga siap bantu onboarding jika diperlukan.</p>
+              <div className={styles.infoItem}>
+                <div className={styles.infoIcon}>💬</div>
+                <div>
+                  <p className={styles.infoLabel}>WHATSAPP</p>
+                  <p className={styles.infoNilai}>+62 812-3456-7890</p>
+                </div>
               </div>
-            </aside>
 
-            {/* Form kontak — Client Component */}
-            <div className={styles.sisiForm}>
-              <div className={styles.kartuForm}>
-                <h2 className={styles.judulForm}>Kirim Pesan</h2>
-                <p className={styles.subForm}>Isi formulir berikut dan kami akan segera menghubungi Anda.</p>
-                <ContactForm />
+              <div className={styles.infoItem}>
+                <div className={styles.infoIcon}>📍</div>
+                <div>
+                  <p className={styles.infoLabel}>KANTOR</p>
+                  <p className={styles.infoNilai}>Jakarta Selatan, Indonesia</p>
+                </div>
               </div>
             </div>
 
+            {/* FAQ Box */}
+            <div className={styles.faqBox}>
+              <h3 className={styles.faqJudul}>Pertanyaan Umum</h3>
+              <div className={styles.faqItem}>
+                <p className={styles.faqPertanyaan}>Apakah ada uji coba gratis?</p>
+                <p className={styles.faqJawaban}>Ya! Semua paket tersedia uji coba gratis 14 hari.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Form Kontak */}
+          <div className="lg:col-span-3">
+            <ContactForm />
           </div>
         </div>
       </section>
-    </>
+    </main>
   );
 }
