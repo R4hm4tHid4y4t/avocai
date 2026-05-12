@@ -90,3 +90,100 @@ Buka [http://localhost:3000](http://localhost:3000).
 
 - **GitHub:** https://github.com/R4hm4tHid4y4t/avocai
 - **Vercel:** https://avocai.vercel.app
+
+# Tugas Minggu 9 — The Professional Upgrade
+
+Panduan integrasi semua file ke dalam project **avocai** (Next.js + Supabase).
+
+---
+
+## 📁 Struktur File yang Perlu Ditambahkan
+
+```
+avocai/
+├── middleware.ts                        ← Task 1 (root project)
+├── app/
+│   ├── lib/
+│   │   └── validations.ts               ← Task 2 (Zod schemas)
+│   ├── actions/
+│   │   └── chat-actions.ts              ← Task 2 (Server Actions + Zod)
+│   ├── components/
+│   │   ├── SearchBar.tsx                ← Task 3 (URL as State)
+│   │   ├── ChatForm.tsx                 ← Task 2 (Form + error display)
+│   │   └── DataList.tsx                 ← Task 4 (Optimistic UI)
+│   ├── dashboard/
+│   │   ├── page.tsx                     ← Halaman utama (semua task)
+│   │   └── loading.tsx                  ← Task 4 (Skeleton UI)
+│   └── login/
+│       └── page.tsx                     ← Halaman login
+```
+
+---
+
+## 🚀 Langkah Integrasi
+
+### 1. Install Zod
+```bash
+npm install zod
+```
+
+### 2. Salin semua file ke project kamu
+Salin setiap file sesuai path yang tertera di struktur di atas.
+
+### 3. Sesuaikan nama tabel Supabase
+Di dalam `app/actions/chat-actions.ts` dan `app/dashboard/page.tsx`,
+ganti `.from("chats")` dengan nama tabel yang kamu buat di Minggu 8.
+
+### 4. Sesuaikan nama cookie session
+Di `middleware.ts`, pastikan nama cookie sesuai dengan yang di-set oleh
+Supabase Auth di project kamu. Biasanya:
+- `sb-<project-ref>-auth-token`
+- Atau `sb-access-token`
+
+Cek nama cookie di browser DevTools → Application → Cookies setelah login.
+
+### 5. Pastikan `app/lib/supabase/server.ts` sudah ada
+File ini dari Tugas Minggu 8. Jika belum ada, buat dengan:
+```ts
+import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
+
+export async function createClient() {
+  const cookieStore = await cookies();
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll: () => cookieStore.getAll(),
+        setAll: (cookiesToSet) => {
+          cookiesToSet.forEach(({ name, value, options }) =>
+            cookieStore.set(name, value, options)
+          );
+        },
+      },
+    }
+  );
+}
+```
+
+---
+
+## ✅ Definition of Done — Checklist
+
+| Syarat | File yang Mengimplementasikan |
+|--------|-------------------------------|
+| ✅ Dashboard tidak bisa dibuka tanpa login | `middleware.ts` |
+| ✅ Form error jika format salah | `ChatForm.tsx` + `chat-actions.ts` + `validations.ts` |
+| ✅ Hasil pencarian tersimpan di URL | `SearchBar.tsx` + `dashboard/page.tsx` |
+| ✅ Hapus data terasa instan (Optimistic UI) | `DataList.tsx` |
+| ✅ Skeleton Loading saat berpindah rute | `dashboard/loading.tsx` |
+
+---
+
+## 📌 Catatan Penting
+
+- **`middleware.ts` harus di root project** (sejajar dengan folder `app/`), bukan di dalam `app/`.
+- `loading.tsx` bekerja **otomatis** — Next.js App Router menampilkannya saat Server Component sedang fetch data. Kamu tidak perlu memanggil komponen ini secara manual.
+- `useOptimistic` di `DataList.tsx` membutuhkan React 19 (sudah bundle di Next.js 15).
+- Semua validasi Zod berjalan di **server** (dalam Server Action), bukan di client, sehingga lebih aman.
