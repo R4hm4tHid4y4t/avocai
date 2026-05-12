@@ -1,12 +1,10 @@
 // app/contact/actions.js
-// Task 2: Integritas Data — Validasi dengan Zod
-
 "use server";
 
 import { z } from "zod";
-import { supabase } from "../../lib/supabase";
+// Kita ganti import-nya menggunakan klien Supabase versi terbaru (Modul 9)
+import { createClient } from "@/app/lib/supabase/server"; 
 
-// Schema validasi Zod
 const pesanSchema = z.object({
   nama_lengkap: z
     .string()
@@ -21,16 +19,13 @@ const pesanSchema = z.object({
     .min(1, "Pilih peran Anda")
     .refine(
       (val) =>
-        ["petani", "distributor", "eksportir", "developer", "lainnya"].includes(
-          val
-        ),
+        ["petani", "distributor", "eksportir", "developer", "lainnya"].includes(val),
       "Peran tidak valid"
     ),
   pesan: z.string().max(500, "Pesan maksimal 500 karakter").optional(),
 });
 
 export async function kirimPesan(prevState, formData) {
-  // Ambil data dari form
   const rawData = {
     nama_lengkap: formData.get("nama_lengkap"),
     email: formData.get("email"),
@@ -38,10 +33,8 @@ export async function kirimPesan(prevState, formData) {
     pesan: formData.get("pesan") || undefined,
   };
 
-  // Validasi dengan Zod .safeParse()
   const validasi = pesanSchema.safeParse(rawData);
 
-  // Jika validasi gagal → kirim error per field ke UI
   if (!validasi.success) {
     const fieldErrors = validasi.error.flatten().fieldErrors;
     return {
@@ -56,7 +49,9 @@ export async function kirimPesan(prevState, formData) {
     };
   }
 
-  // Simpan ke Supabase (data sudah tervalidasi)
+  // Panggil Supabase secara dinamis di dalam fungsi (standar Next.js 14)
+  const supabase = await createClient();
+
   const { error } = await supabase.from("messages").insert([
     {
       nama_lengkap: validasi.data.nama_lengkap,
