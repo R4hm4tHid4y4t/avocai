@@ -4,7 +4,7 @@
 "use server";
 
 import { z } from "zod";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "../../lib/supabase";
 
 // Schema validasi Zod
 const pesanSchema = z.object({
