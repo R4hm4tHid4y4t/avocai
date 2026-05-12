@@ -1,4 +1,4 @@
-/* app/contact/contact.module.css */
+/* app/contact/contact.module.css — ditambahkan style error field */
 
 /* ===== HALAMAN KONTAK ===== */
 .halaman {
@@ -6,7 +6,6 @@
   background-color: var(--krem);
 }
 
-/* Hero */
 .hero {
   padding: 100px 0 48px;
   text-align: center;
@@ -43,7 +42,6 @@
   margin: 0 auto;
 }
 
-/* Layout Konten */
 .konten {
   padding: 0 24px 96px;
 }
@@ -58,15 +56,11 @@
 }
 
 @media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-  .hero {
-    padding: 80px 24px 40px;
-  }
+  .grid { grid-template-columns: 1fr; }
+  .hero { padding: 80px 24px 40px; }
 }
 
-/* ===== PANEL INFO KONTAK ===== */
+/* ===== INFO KONTAK ===== */
 .infoPanel {
   display: flex;
   flex-direction: column;
@@ -126,7 +120,6 @@
   color: var(--teks-gelap);
 }
 
-/* FAQ Box */
 .faqBox {
   background: var(--krem-gelap);
   border-radius: var(--radius);
@@ -144,9 +137,7 @@
   margin-bottom: 12px;
 }
 
-.faqItem:last-child {
-  margin-bottom: 0;
-}
+.faqItem:last-child { margin-bottom: 0; }
 
 .faqPertanyaan {
   font-size: 0.85rem;
@@ -207,27 +198,13 @@
   margin-bottom: 24px;
 }
 
-.notifIcon {
-  font-size: 1.1rem;
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
-.notifJudul {
-  font-size: 0.88rem;
-  font-weight: 700;
-  margin-bottom: 2px;
-}
-
+.notifIcon { font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+.notifJudul { font-size: 0.88rem; font-weight: 700; margin-bottom: 2px; }
 .notifSukses .notifJudul { color: #166534; }
-.notifError .notifJudul  { color: #991b1b; }
-
-.notifPesan {
-  font-size: 0.85rem;
-}
-
+.notifError .notifJudul { color: #991b1b; }
+.notifPesan { font-size: 0.85rem; }
 .notifSukses .notifPesan { color: #15803d; }
-.notifError .notifPesan  { color: #b91c1c; }
+.notifError .notifPesan { color: #b91c1c; }
 
 /* Form */
 .form {
@@ -250,7 +227,7 @@
 .fieldGroup {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .label {
@@ -259,10 +236,7 @@
   color: var(--teks-gelap);
 }
 
-.wajib {
-  color: #e53e3e;
-  margin-left: 2px;
-}
+.wajib { color: #e53e3e; margin-left: 2px; }
 
 .input,
 .select,
@@ -280,15 +254,34 @@
 }
 
 .input::placeholder,
-.textarea::placeholder {
-  color: #9ca3af;
-}
+.textarea::placeholder { color: #9ca3af; }
 
 .input:focus,
 .select:focus,
 .textarea:focus {
   border-color: var(--hijau-sedang);
   box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.2);
+}
+
+/* Error state input */
+.inputError {
+  border-color: #f87171 !important;
+  background: #fff5f5;
+}
+
+.inputError:focus {
+  border-color: #f87171 !important;
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.2) !important;
+}
+
+/* Field error message */
+.fieldError {
+  font-size: 0.78rem;
+  color: #dc2626;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .textarea {

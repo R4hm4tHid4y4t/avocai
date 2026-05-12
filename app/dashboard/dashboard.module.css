@@ -1,0 +1,503 @@
+/* app/dashboard/dashboard.module.css */
+
+/* ===== LAYOUT ===== */
+.layout {
+  min-height: 100vh;
+  background: #f8f9fa;
+  font-family: var(--font-teks);
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 64px;
+  background: var(--hijau-tua);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}
+
+.navLogo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoIcon {
+  font-size: 1.5rem;
+}
+
+.logoTeks {
+  font-family: var(--font-judul);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--putih);
+}
+
+.logoTeks span {
+  color: var(--hijau-muda);
+}
+
+.navBadge {
+  background: rgba(82, 183, 136, 0.25);
+  border: 1px solid rgba(82, 183, 136, 0.4);
+  color: var(--hijau-muda);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navLink {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navLink:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--putih);
+}
+
+.tombolLogout {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 6px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-teks);
+}
+
+.tombolLogout:hover {
+  background: rgba(220,50,50,0.25);
+  border-color: rgba(220,50,50,0.4);
+  color: #fca5a5;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ===== HEADER ===== */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.headerJudul {
+  font-family: var(--font-judul);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--hijau-tua);
+  margin-bottom: 4px;
+}
+
+.headerSub {
+  font-size: 0.9rem;
+  color: var(--teks-abu);
+}
+
+.filterInfo {
+  color: var(--hijau-sedang);
+  font-weight: 600;
+}
+
+.tombolPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--hijau-tua);
+  color: var(--putih);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-family: var(--font-teks);
+}
+
+.tombolPrimary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(26,58,42,0.25);
+}
+
+/* ===== STATS GRID ===== */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.statCard {
+  background: var(--putih);
+  border-radius: 16px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.statIcon {
+  font-size: 2rem;
+  width: 52px;
+  height: 52px;
+  background: rgba(82, 183, 136, 0.1);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statAngka {
+  font-family: var(--font-judul);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--hijau-tua);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  color: var(--teks-abu);
+  margin-top: 4px;
+}
+
+/* ===== CARD ===== */
+.card {
+  background: var(--putih);
+  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cardJudul {
+  font-family: var(--font-judul);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--hijau-tua);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.countBadge {
+  background: rgba(82, 183, 136, 0.12);
+  color: var(--hijau-sedang);
+  font-family: var(--font-teks);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+/* ===== SEARCH BAR ===== */
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 280px;
+  padding: 9px 14px 9px 36px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  font-family: var(--font-teks);
+  font-size: 0.85rem;
+  color: var(--teks-gelap);
+  background: #fafafa;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.searchInput:focus {
+  border-color: var(--hijau-sedang);
+  box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.15);
+  background: var(--putih);
+}
+
+.searchBadge {
+  font-size: 0.78rem;
+  color: var(--hijau-sedang);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ===== TABLE ===== */
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead tr {
+  background: #fafafa;
+}
+
+.table th {
+  padding: 12px 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--teks-abu);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+  white-space: nowrap;
+}
+
+.tableRow {
+  border-bottom: 1px solid #f5f5f5;
+  transition: background 0.15s;
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableRow:hover {
+  background: #fafff9;
+}
+
+.table td {
+  padding: 14px 20px;
+  vertical-align: middle;
+}
+
+/* Pengirim */
+.pengirimInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--hijau-sedang), var(--hijau-tua));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--putih);
+  flex-shrink: 0;
+}
+
+.nama {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--teks-gelap);
+  margin-bottom: 2px;
+}
+
+.email {
+  font-size: 0.78rem;
+  color: var(--teks-abu);
+}
+
+/* Badge Peran */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.badgePetani {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+.badgeDistributor {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+.badgeEksportir {
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+}
+.badgeDeveloper {
+  background: #faf5ff;
+  color: #7c3aed;
+  border: 1px solid #e9d5ff;
+}
+.badgeLainnya {
+  background: #f9fafb;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}
+
+/* Pesan */
+.pesanTeks {
+  font-size: 0.85rem;
+  color: var(--teks-gelap);
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tidakAdaPesan {
+  color: #d1d5db;
+  font-style: italic;
+}
+
+/* Tanggal */
+.tanggal {
+  font-size: 0.78rem;
+  color: var(--teks-abu);
+  white-space: nowrap;
+}
+
+/* Tombol Hapus */
+.tombolHapus {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-teks);
+  white-space: nowrap;
+}
+
+.tombolHapus:hover {
+  background: #dc2626;
+  color: var(--putih);
+  border-color: #dc2626;
+}
+
+/* Kosong */
+.kosong {
+  padding: 64px 24px;
+  text-align: center;
+}
+
+.kosongIcon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.kosongTeks {
+  font-family: var(--font-judul);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--teks-gelap);
+  margin-bottom: 6px;
+}
+
+.kosongSub {
+  font-size: 0.88rem;
+  color: var(--teks-abu);
+}
+
+/* ===== SKELETON LOADING ===== */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: 6px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeletonLine {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+.skeletonSm { width: 80px; }
+.skeletonMd { width: 140px; }
+.skeletonLg { width: 220px; }
+.skeletonXl { width: 200px; height: 20px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .navbar { padding: 0 16px; }
+  .main { padding: 20px 16px; }
+  .statsGrid { grid-template-columns: 1fr; }
+  .header { flex-direction: column; }
+  .cardHeader { flex-direction: column; align-items: flex-start; }
+  .searchInput { width: 100%; }
+}
