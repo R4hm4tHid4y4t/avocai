@@ -15,37 +15,16 @@ export interface ActionState {
   };
 }
 
-// QA & Testing: Skema validasi ketat untuk "Naughty User"
+// Zod Schema untuk menangkal Naughty User
 const chatSchema = z.object({
-  nama_lengkap: z
-    .string()
-    .trim()
-    .min(2, "Nama terlalu pendek")
-    .max(50, "Nama maksimal 50 karakter"), // Mencegah payload besar
-  email: z
-    .string()
-    .trim()
-    .email("Format email tidak valid")
-    .max(100, "Email terlalu panjang"),
+  nama_lengkap: z.string().trim().min(2, "Nama minimal 2 karakter").max(50, "Maksimal 50 karakter"),
+  email: z.string().trim().email("Format email tidak valid").max(100, "Email terlalu panjang"),
   peran: z.string().min(1, "Peran wajib dipilih"),
-  pesan: z
-    .string()
-    .trim()
-    .max(500, "Pesan maksimal 500 karakter")
-    .optional(),
+  pesan: z.string().trim().max(500, "Maksimal 500 karakter").optional(),
 });
 
-export async function createChatAction(
-  prevState: ActionState,
-  formData: FormData
-): Promise<ActionState> {
-  const rawData = {
-    nama_lengkap: formData.get("nama_lengkap"),
-    email: formData.get("email"),
-    peran: formData.get("peran"),
-    pesan: formData.get("pesan"),
-  };
-
+export async function createChatAction(prevState: ActionState, formData: FormData): Promise<ActionState> {
+  const rawData = Object.fromEntries(formData.entries());
   const validatedFields = chatSchema.safeParse(rawData);
 
   if (!validatedFields.success) {
@@ -57,48 +36,23 @@ export async function createChatAction(
   }
 
   const supabase = await createClient();
+  const { error } = await supabase.from("messages").insert([validatedFields.data]);
 
-  const { error } = await supabase.from("messages").insert([
-    {
-      nama_lengkap: validatedFields.data.nama_lengkap,
-      email: validatedFields.data.email,
-      peran: validatedFields.data.peran,
-      pesan: validatedFields.data.pesan || null,
-    },
-  ]);
-
-  // Readiness Audit: Menghapus console.error untuk produksi
-  if (error) {
-    return {
-      success: false,
-      message: "Terjadi kesalahan pada server database. Silakan coba lagi.",
-    };
-  }
+  // Clean Code: Tanpa console.log/error untuk production
+  if (error) return { success: false, message: "Terjadi kesalahan pada server database." };
 
   revalidatePath("/dashboard");
-
-  return {
-    success: true,
-    message: "Data berhasil ditambahkan ke sistem!",
-  };
+  return { success: true, message: "Data berhasil ditambahkan ke sistem!" };
 }
 
-export async function deleteChatAction(
-  prevState: ActionState,
-  formData: FormData
-): Promise<ActionState> {
+export async function deleteChatAction(prevState: ActionState, formData: FormData): Promise<ActionState> {
   const id = formData.get("id");
-
-  if (!id || typeof id !== "string") {
-    return { success: false, message: "ID data tidak valid." };
-  }
+  if (!id || typeof id !== "string") return { success: false, message: "ID data tidak valid." };
 
   const supabase = await createClient();
   const { error } = await supabase.from("messages").delete().eq("id", id);
 
-  if (error) {
-    return { success: false, message: "Gagal menghapus data dari server." };
-  }
+  if (error) return { success: false, message: "Gagal menghapus data dari server." };
 
   revalidatePath("/dashboard");
   return { success: true, message: "Data berhasil dihapus." };
