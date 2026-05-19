@@ -1,36 +1,87 @@
-"use client";
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
 
+const menuItems = [
+  { href: '/', label: 'Beranda' },
+  { href: '/about', label: 'Tentang' },
+  { href: '/services', label: 'Layanan' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Kontak' },
+];
+
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [terScroll, setTerScroll] = useState(false);
+  const [menuTerbuka, setMenuTerbuka] = useState(false);
   const pathname = usePathname();
 
-  // Sembunyikan Navbar pada halaman login dan dashboard
-  if (pathname.startsWith('/dashboard') || pathname.startsWith('/login')) {
+  useEffect(() => {
+    const handleScroll = () => setTerScroll(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setMenuTerbuka(false);
+  }, [pathname]);
+
+  // KUNCI: Navbar otomatis menghilang di halaman login & dashboard
+  if (pathname?.startsWith('/dashboard') || pathname?.startsWith('/login')) {
     return null;
   }
 
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.logo}>
-        <Link href="/">🥑 AvocAI</Link>
-      </div>
-      <div className={`${styles.navLinks} ${isOpen ? styles.active : ''}`}>
-        <Link href="/" onClick={() => setIsOpen(false)}>Beranda</Link>
-        <Link href="/services" onClick={() => setIsOpen(false)}>Layanan</Link>
-        <Link href="/about" onClick={() => setIsOpen(false)}>Tentang</Link>
-        <Link href="/contact" onClick={() => setIsOpen(false)}>Kontak</Link>
-        <Link href="/blog" onClick={() => setIsOpen(false)}>Blog</Link>
-        <Link href="/login" className={styles.loginBtn} onClick={() => setIsOpen(false)}>
-          Login Enterprise
+    <nav className={`${styles.navbar} ${terScroll ? styles.terScroll : ''}`}>
+      <div className={`container ${styles.navDalam}`}>
+        <Link href="/" className={styles.logo}>
+          <div className={styles.logoIkon}>🥑</div>
+          <div className={styles.logonama}>Avoc<span>AI</span></div>
         </Link>
+        
+        <ul className={styles.menuDesktop}>
+          {menuItems.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href} className={styles.tautanNav}>
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <div className={styles.aksiDesktop}>
+          <Link href="/login" className={styles.tombolLogin}>
+            Login Enterprise
+          </Link>
+        </div>
+
+        <button 
+          className={`${styles.hamburger} ${menuTerbuka ? styles.terbuka : ''}`}
+          onClick={() => setMenuTerbuka(!menuTerbuka)}
+          aria-label="Toggle Menu"
+        >
+          <span></span><span></span><span></span>
+        </button>
       </div>
-      <button className={styles.hamburger} onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">
-        <span></span><span></span><span></span>
-      </button>
+
+      <div className={`${styles.menuMobile} ${menuTerbuka ? styles.menuMobileAktif : ''}`}>
+        <ul className={styles.daftarMobile}>
+          {menuItems.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href} className={styles.tautanMobile}>
+                {item.label}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <Link href="/login" className={styles.tombolLoginMobile}>
+              Login Enterprise
+            </Link>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 }
