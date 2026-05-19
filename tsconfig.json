@@ -24,6 +24,6 @@
     },
     "ignoreDeprecations": "6.0"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/login/page.tsx", "app/dashboard/page.js", "app/dashboard/loading.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/login/page.tsx", "app/dashboard/page.js", "app/dashboard/loading.tsx"],
   "exclude": ["node_modules"]
 }

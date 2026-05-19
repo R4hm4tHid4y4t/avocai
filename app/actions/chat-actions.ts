@@ -1,114 +1,105 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { z } from "zod";
 import { createClient } from "@/app/lib/supabase/server";
-import { chatSchema, loginSchema } from "@/app/lib/validations";
 
-export type ActionState = {
+export interface ActionState {
   success: boolean;
   message: string;
-  errors?: Record<string, string[]>;
-  data?: unknown;
-};
+  errors?: {
+    nama_lengkap?: string[];
+    email?: string[];
+    peran?: string[];
+    pesan?: string[];
+  };
+}
+
+// QA & Testing: Skema validasi ketat untuk "Naughty User"
+const chatSchema = z.object({
+  nama_lengkap: z
+    .string()
+    .trim()
+    .min(2, "Nama terlalu pendek")
+    .max(50, "Nama maksimal 50 karakter"), // Mencegah payload besar
+  email: z
+    .string()
+    .trim()
+    .email("Format email tidak valid")
+    .max(100, "Email terlalu panjang"),
+  peran: z.string().min(1, "Peran wajib dipilih"),
+  pesan: z
+    .string()
+    .trim()
+    .max(500, "Pesan maksimal 500 karakter")
+    .optional(),
+});
 
 export async function createChatAction(
-  _prevState: ActionState,
+  prevState: ActionState,
   formData: FormData
 ): Promise<ActionState> {
-  const supabase = await createClient();
-
-  const rawInput = {
+  const rawData = {
     nama_lengkap: formData.get("nama_lengkap"),
     email: formData.get("email"),
     peran: formData.get("peran"),
     pesan: formData.get("pesan"),
   };
 
-  const parsed = chatSchema.safeParse(rawInput);
+  const validatedFields = chatSchema.safeParse(rawData);
 
-  if (!parsed.success) {
+  if (!validatedFields.success) {
     return {
       success: false,
-      message: "Validasi gagal. Periksa kembali isian form.",
-      errors: parsed.error.flatten().fieldErrors,
+      message: "Gagal menyimpan. Periksa kembali form Anda.",
+      errors: validatedFields.error.flatten().fieldErrors,
     };
   }
 
-  const { error } = await supabase
-    .from("messages")
-    .insert({
-      nama_lengkap: parsed.data.nama_lengkap,
-      email: parsed.data.email,
-      peran: parsed.data.peran,
-      pesan: parsed.data.pesan || null,
-    });
+  const supabase = await createClient();
 
+  const { error } = await supabase.from("messages").insert([
+    {
+      nama_lengkap: validatedFields.data.nama_lengkap,
+      email: validatedFields.data.email,
+      peran: validatedFields.data.peran,
+      pesan: validatedFields.data.pesan || null,
+    },
+  ]);
+
+  // Readiness Audit: Menghapus console.error untuk produksi
   if (error) {
     return {
       success: false,
-      message: `Gagal menyimpan data: ${error.message}`,
+      message: "Terjadi kesalahan pada server database. Silakan coba lagi.",
     };
   }
 
   revalidatePath("/dashboard");
-  return { success: true, message: "Data berhasil ditambahkan." };
+
+  return {
+    success: true,
+    message: "Data berhasil ditambahkan ke sistem!",
+  };
 }
 
 export async function deleteChatAction(
-  _prevState: ActionState,
+  prevState: ActionState,
   formData: FormData
 ): Promise<ActionState> {
-  const supabase = await createClient();
   const id = formData.get("id");
 
   if (!id || typeof id !== "string") {
-    return { success: false, message: "ID tidak valid." };
+    return { success: false, message: "ID data tidak valid." };
   }
 
+  const supabase = await createClient();
   const { error } = await supabase.from("messages").delete().eq("id", id);
 
   if (error) {
-    return {
-      success: false,
-      message: `Gagal menghapus data: ${error.message}`,
-    };
+    return { success: false, message: "Gagal menghapus data dari server." };
   }
 
   revalidatePath("/dashboard");
   return { success: true, message: "Data berhasil dihapus." };
-}
-
-export async function loginAction(
-  _prevState: ActionState,
-  formData: FormData
-): Promise<ActionState> {
-  const supabase = await createClient();
-  const rawInput = {
-    email: formData.get("email"),
-    password: formData.get("password"),
-  };
-
-  const parsed = loginSchema.safeParse(rawInput);
-
-  if (!parsed.success) {
-    return {
-      success: false,
-      message: "Periksa kembali email dan password.",
-      errors: parsed.error.flatten().fieldErrors,
-    };
-  }
-
-  const { error } = await supabase.auth.signInWithPassword({
-    email: parsed.data.email,
-    password: parsed.data.password,
-  });
-
-  if (error) {
-    return {
-      success: false,
-      message: `Login gagal: ${error.message}`,
-    };
-  }
-
-  return { success: true, message: "Login berhasil." };
 }

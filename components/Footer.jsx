@@ -1,74 +1,41 @@
 import Link from 'next/link';
 import styles from './Footer.module.css';
 
-const kolomProduk = [
-  { label: 'Fitur', href: '/#fitur' },
-  { label: 'Cara Kerja', href: '/#cara-kerja' },
-  { label: 'Layanan', href: '/services' },
-  { label: 'Harga', href: '/services#harga' },
-];
-
-const kolomPerusahaan = [
-  { label: 'Tentang Kami', href: '/about' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Kontak', href: '/contact' },
-];
-
-const kolomDukungan = [
-  { label: 'Dokumentasi API', href: '#' },
-  { label: 'Pusat Bantuan', href: '#' },
-  { label: 'Status Layanan', href: '#' },
-];
-
-// Footer adalah Server Component — tidak ada interaksi browser
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className={styles.footer}>
-      <div className="container">
-        <div className={styles.footerAtas}>
-          <div className={styles.brand}>
-            <Link href="/" className={styles.logoFooter}>
-              <div className={styles.logoIkon}>🥑</div>
-              <span className={styles.logonama}>Avoc<span>AI</span></span>
-            </Link>
-            <p className={styles.deskripsi}>
-              Platform klasifikasi kematangan alpukat berbasis AI yang membantu
-              petani dan bisnis agritech meningkatkan efisiensi panen dan distribusi.
-            </p>
+      <div className={styles.footerContent}>
+        <div className={styles.brandSection}>
+          <div className={styles.logo}>
+            <span className={styles.logoIcon}>🥑</span>
+            <span className={styles.logoText}>AvocAI</span>
           </div>
-
-          <div className={styles.kolomWrapper}>
-            <KolomLink judul="Produk" items={kolomProduk} />
-            <KolomLink judul="Perusahaan" items={kolomPerusahaan} />
-            <KolomLink judul="Dukungan" items={kolomDukungan} />
-          </div>
+          <p className={styles.description}>
+            Memberdayakan petani dan industri agritech dengan klasifikasi alpukat berbasis AI yang akurat dan efisien.
+          </p>
         </div>
 
-        <div className={styles.footerBawah}>
-          <p className={styles.hakCipta}>© 2026 AvocAI. Hak cipta dilindungi.</p>
-          <div className={styles.tautanLegal}>
-            <Link href="#">Kebijakan Privasi</Link>
-            <Link href="#">Syarat &amp; Ketentuan</Link>
+        <div className={styles.linksSection}>
+          <div className={styles.linkGroup}>
+            <h4>Produk</h4>
+            {/* NO DEAD ENDS: Mengarah ke halaman yang sudah ada */}
+            <Link href="/services">Fitur Utama</Link>
+            <Link href="/dashboard">Enterprise Dashboard</Link>
+          </div>
+          
+          <div className={styles.linkGroup}>
+            <h4>Perusahaan</h4>
+            <Link href="/about">Tentang Kami</Link>
+            <Link href="/contact">Hubungi Sales</Link>
           </div>
         </div>
       </div>
+      
+      <div className={styles.footerBottom}>
+        <p>&copy; {currentYear} AvocAI. All rights reserved.</p>
+      </div>
     </footer>
-  );
-}
-
-function KolomLink({ judul, items }) {
-  return (
-    <div className={styles.kolom}>
-      <h4 className={styles.judulKolom}>{judul}</h4>
-      <ul>
-        {items.map((item) => (
-          <li key={item.href}>
-            <Link href={item.href} className={styles.tautanKolom}>
-              {item.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }
