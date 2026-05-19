@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* ===== GOOGLE FONTS ===== */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap');
 
@@ -27,8 +31,6 @@
   --font-teks:    'DM Sans', sans-serif;
 
   /* ── Variabel tambahan untuk komponen Dashboard & Login ── */
-
-  /* Green scale (dipakai Sidebar, BrandPanel, Charts, dll.) */
   --green-950: #0a1f14;
   --green-900: #0f2e1c;
   --green-800: #1a4a2e;
@@ -40,11 +42,9 @@
   --green-200: #b3e6c2;
   --green-100: #dff2e6;
 
-  /* Font alias (dipakai komponen dashboard) */
   --font-display: 'Syne', 'Playfair Display', Georgia, serif;
   --font-body:    'DM Sans', sans-serif;
 
-  /* Background alias */
   --warm-white:   #fdfcfa;
   --warm:         #f5f3ef;
 }
@@ -185,11 +185,6 @@ body {
 .strength-bar.strong { background: var(--green-500); }
 
 /* ===== SECTION SPACING ===== */
-/*
-  Hanya berlaku untuk halaman landing (bukan login/dashboard).
-  Login dan dashboard punya layout sendiri via app/login/layout.js
-  dan app/dashboard/layout.tsx yang tidak mewarisi padding ini.
-*/
 main:not(.dashboard-main) section {
   padding: 96px 0;
 }
