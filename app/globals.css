@@ -5,34 +5,51 @@
 /* ===== GOOGLE FONTS ===== */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap');
 
-/* ===== RESET STANDAR ===== */
+/* ===== RESET ===== */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* ===== VARIABEL — Landing Page (Indonesia) ===== */
 :root {
-  --hijau-tua: #1a3a2a;
+  /* Warna landing page asli */
+  --hijau-tua:    #1a3a2a;
   --hijau-sedang: #2d6a4f;
-  --hijau-muda: #52b788;
-  --krem: #f5f0e8;
-  --krem-gelap: #ede5d4;
-  --putih: #ffffff;
-  --teks-gelap: #111814;
-  --teks-abu: #5a6e61;
+  --hijau-muda:   #52b788;
+  --krem:         #f5f0e8;
+  --krem-gelap:   #ede5d4;
+  --putih:        #ffffff;
+  --teks-gelap:   #111814;
+  --teks-abu:     #5a6e61;
   --aksen-kuning: #e9c46a;
   --aksen-orange: #f4a261;
-  --radius: 14px;
+  --radius:       14px;
   --radius-besar: 28px;
-  --font-judul: 'Playfair Display', Georgia, serif;
-  --font-teks: 'DM Sans', sans-serif;
+  --font-judul:   'Playfair Display', Georgia, serif;
+  --font-teks:    'DM Sans', sans-serif;
+
+  /* ── Variabel tambahan untuk komponen Dashboard & Login ── */
+  --green-950: #0a1f14;
+  --green-900: #0f2e1c;
+  --green-800: #1a4a2e;
+  --green-700: #225c38;
+  --green-600: #2d7a4a;
+  --green-500: #3d9e60;
+  --green-400: #5abf7a;
+  --green-300: #84d49b;
+  --green-200: #b3e6c2;
+  --green-100: #dff2e6;
+
   --font-display: 'Syne', 'Playfair Display', Georgia, serif;
-  --font-body: 'DM Sans', sans-serif;
-  --warm-white: #fdfcfa;
-  --warm: #f5f3ef;
+  --font-body:    'DM Sans', sans-serif;
+
+  --warm-white:   #fdfcfa;
+  --warm:         #f5f3ef;
 }
 
+/* ===== BASE ===== */
 html {
   scroll-behavior: smooth;
 }
@@ -45,7 +62,7 @@ body {
   line-height: 1.6;
 }
 
-/* ===== UTILITAS HALAMAN UTAMA ===== */
+/* ===== UTILITAS LANDING PAGE ===== */
 .container {
   width: 100%;
   max-width: 1160px;
@@ -90,6 +107,28 @@ body {
   box-shadow: 0 10px 28px rgba(26, 58, 42, 0.28);
 }
 
+.tombol-sekunder {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--hijau-tua);
+  font-family: var(--font-teks);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 13px 28px;
+  border-radius: 999px;
+  border: 2px solid var(--hijau-tua);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.tombol-sekunder:hover {
+  background: var(--hijau-tua);
+  color: var(--putih);
+}
+
 .judul-seksi {
   font-family: var(--font-judul);
   font-size: clamp(1.8rem, 3vw, 2.6rem);
@@ -99,9 +138,66 @@ body {
   margin: 12px 0;
 }
 
-/* ===== RESPONSIVE MEDIA QUERIES ===== */
+.subjudul-seksi {
+  font-size: 1.05rem;
+  color: var(--teks-abu);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.kepala-seksi {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+/* ===== ANIMASI ===== */
+.animasi-masuk {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.animasi-masuk.terlihat {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Dipakai halaman login & dashboard */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.35s ease forwards;
+}
+
+/* ===== STRENGTH BAR (form register) ===== */
+.strength-bar {
+  height: 3px;
+  flex: 1;
+  border-radius: 100px;
+  background: #e8e5e0;
+  transition: background 0.3s;
+}
+.strength-bar.weak   { background: #ef4444; }
+.strength-bar.medium { background: #f59e0b; }
+.strength-bar.strong { background: var(--green-500); }
+
+/* ===== SECTION SPACING ===== */
+main:not(.dashboard-main) section {
+  padding: 96px 0;
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
+  main:not(.dashboard-main) section {
+    padding: 64px 0;
+  }
   .judul-seksi {
     font-size: 1.8rem;
+  }
+  .brand-panel-wrapper {
+    display: none !important;
   }
 }
