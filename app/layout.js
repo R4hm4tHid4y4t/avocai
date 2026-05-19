@@ -22,14 +22,13 @@ export const metadata = {
     default: 'AvocAI – Klasifikasi Alpukat Otomatis',
     template: '%s | AvocAI',
   },
-  description: 'Platform klasifikasi kematangan alpukat berbasis AI yang membantu petani dan bisnis agritech meningkatkan efisiensi panen dan distribusi.',
-  keywords: ['alpukat', 'klasifikasi', 'AI', 'agritech', 'machine learning'],
+  description: 'Platform klasifikasi kematangan alpukat berbasis AI tingkat lanjut.',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="id" className={`${playfair.variable} ${dmSans.variable}`}>
-      <body>
+      <body className="antialiased">
         <Navbar />
         <main>{children}</main>
         <Footer />
