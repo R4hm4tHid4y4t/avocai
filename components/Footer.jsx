@@ -1,8 +1,16 @@
+"use client";
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styles from './Footer.module.css';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+
+  // Sembunyikan Footer pada halaman login dan dashboard
+  if (pathname.startsWith('/dashboard') || pathname.startsWith('/login')) {
+    return null;
+  }
 
   return (
     <footer className={styles.footer}>
@@ -20,7 +28,6 @@ export default function Footer() {
         <div className={styles.linksSection}>
           <div className={styles.linkGroup}>
             <h4>Produk</h4>
-            {/* NO DEAD ENDS: Mengarah ke halaman yang sudah ada */}
             <Link href="/services">Fitur Utama</Link>
             <Link href="/dashboard">Enterprise Dashboard</Link>
           </div>

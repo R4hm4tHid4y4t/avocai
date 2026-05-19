@@ -1,10 +1,17 @@
 "use client";
 import Link from 'next/link';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Sembunyikan Navbar pada halaman login dan dashboard
+  if (pathname.startsWith('/dashboard') || pathname.startsWith('/login')) {
+    return null;
+  }
 
   return (
     <nav className={styles.navbar}>
