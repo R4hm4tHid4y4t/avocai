@@ -1,45 +1,25 @@
-// app/contact/actions.js
 "use server";
 
 import { z } from "zod";
-// Kita ganti import-nya menggunakan klien Supabase versi terbaru (Modul 9)
-import { createClient } from "@/app/lib/supabase/server"; 
+import { createClient } from "@/app/lib/supabase/server";
 
+// QA: Validasi ketat untuk mencegah Naughty User (limit karakter & format)
 const pesanSchema = z.object({
-  nama_lengkap: z
-    .string()
-    .min(2, "Nama minimal 2 karakter")
-    .max(100, "Nama terlalu panjang"),
-  email: z
-    .string()
-    .min(1, "Email wajib diisi")
-    .email("Format email tidak valid"),
-  peran: z
-    .string()
-    .min(1, "Pilih peran Anda")
-    .refine(
-      (val) =>
-        ["petani", "distributor", "eksportir", "developer", "lainnya"].includes(val),
-      "Peran tidak valid"
-    ),
-  pesan: z.string().max(500, "Pesan maksimal 500 karakter").optional(),
+  nama_lengkap: z.string().trim().min(2, "Nama minimal 2 karakter").max(50, "Nama maksimal 50 karakter"),
+  email: z.string().trim().min(1, "Email wajib diisi").email("Format email tidak valid").max(100, "Email terlalu panjang"),
+  peran: z.string().min(1, "Pilih peran Anda"),
+  pesan: z.string().trim().max(500, "Pesan maksimal 500 karakter").optional(),
 });
 
 export async function kirimPesan(prevState, formData) {
-  const rawData = {
-    nama_lengkap: formData.get("nama_lengkap"),
-    email: formData.get("email"),
-    peran: formData.get("peran"),
-    pesan: formData.get("pesan") || undefined,
-  };
-
+  const rawData = Object.fromEntries(formData.entries());
   const validasi = pesanSchema.safeParse(rawData);
 
   if (!validasi.success) {
     const fieldErrors = validasi.error.flatten().fieldErrors;
     return {
       success: false,
-      message: "Mohon perbaiki kesalahan di bawah ini.",
+      message: "Gagal memproses. Periksa kembali input Anda.",
       errors: {
         nama_lengkap: fieldErrors.nama_lengkap?.[0] || null,
         email: fieldErrors.email?.[0] || null,
@@ -49,30 +29,13 @@ export async function kirimPesan(prevState, formData) {
     };
   }
 
-  // Panggil Supabase secara dinamis di dalam fungsi (standar Next.js 14)
   const supabase = await createClient();
+  const { error } = await supabase.from("messages").insert([validasi.data]);
 
-  const { error } = await supabase.from("messages").insert([
-    {
-      nama_lengkap: validasi.data.nama_lengkap,
-      email: validasi.data.email,
-      peran: validasi.data.peran,
-      pesan: validasi.data.pesan || null,
-    },
-  ]);
-
+  // Clean Code: Hapus console.error untuk production deployment
   if (error) {
-    console.error("Supabase error:", error);
-    return {
-      success: false,
-      message: "Terjadi kesalahan server. Silakan coba lagi.",
-      errors: {},
-    };
+    return { success: false, message: "Terjadi kesalahan jaringan, silakan coba lagi.", errors: {} };
   }
 
-  return {
-    success: true,
-    message: "Pesan berhasil dikirim! Tim kami akan menghubungi Anda dalam 1×24 jam.",
-    errors: {},
-  };
+  return { success: true, message: "Pesan terkirim! Tim AvocAI akan segera menghubungi Anda.", errors: {} };
 }
