@@ -1,21 +1,26 @@
 export default function DashboardLoading() {
   return (
-    <div className="flex min-h-screen bg-[#f8f9fa] w-full">
-      {/* Sidebar Placeholder */}
-      <div className="hidden md:block w-64 h-screen bg-white border-r border-gray-100"></div>
-      
-      <div className="flex-1 flex flex-col min-w-0">
-        <div className="h-16 border-b border-gray-100 bg-white/80 w-full"></div>
-        <div className="flex-1 p-6 lg:p-8 space-y-8 animate-pulse">
-          {/* 4 Cards Skeleton */}
-          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            {[1, 2, 3, 4].map(i => (
-              <div key={i} className="h-32 bg-white border border-gray-100 rounded-[14px]"></div>
-            ))}
+    <div className="p-8 animate-pulse">
+      <div className="h-8 w-48 bg-gray-200 rounded-lg mb-2" />
+      <div className="h-4 w-64 bg-gray-100 rounded mb-8" />
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="bg-white rounded-xl p-5 shadow-sm border-t-4 border-t-gray-200">
+            <div className="w-8 h-8 bg-gray-200 rounded mb-3" />
+            <div className="h-8 w-20 bg-gray-200 rounded mb-2" />
+            <div className="h-4 w-32 bg-gray-100 rounded mb-3" />
+            <div className="h-5 w-24 bg-gray-100 rounded-full" />
           </div>
-          {/* Main Chart Skeleton */}
-          <div className="h-[400px] bg-white border border-gray-100 rounded-3xl"></div>
-        </div>
+        ))}
+      </div>
+      <div className="bg-white rounded-xl p-6 shadow-sm">
+        <div className="h-6 w-40 bg-gray-200 rounded mb-4" />
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="flex justify-between py-3 border-b border-gray-50">
+            <div className="h-4 w-64 bg-gray-100 rounded" />
+            <div className="h-4 w-20 bg-gray-100 rounded" />
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,96 +1,94 @@
-import React, { Suspense } from "react";
-import { createClient } from "@/app/lib/supabase/server";
-import { Sidebar } from "@/components/dashboard/Sidebar";
-import { MetricCardComponent } from "@/components/dashboard/MetricCard";
-import { WeeklyBarChart, DonutChart } from "@/components/dashboard/Charts";
-import { QuickActions } from "@/components/dashboard/QuickActions";
-import { ActivityFeed } from "@/components/dashboard/ActivityFeed";
-import SearchBar from "@/app/components/SearchBar";
-import DataList from "@/app/components/DataList";
-import ChatForm from "@/app/components/ChatForm";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Pusat Kontrol Utama | AvocAI",
-  description: "Enterprise dashboard untuk sistem klasifikasi alpukat.",
-};
+export const metadata: Metadata = { title: "Dashboard" };
 
-// QA Testing: Menerima URL State Search Params
-export default async function DashboardPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
-  const { q: query = "" } = await searchParams;
+const stats = [
+  {
+    emoji: "🥑",
+    value: "1,248",
+    label: "Total Analisis Buah",
+    badge: "+12% minggu lalu",
+    badgeColor: "bg-green-100 text-green-700",
+    borderColor: "border-t-green-500",
+  },
+  {
+    emoji: "🎯",
+    value: "98.4%",
+    label: "Tingkat Akurasi CNN",
+    badge: "Model v2.4-stable",
+    badgeColor: "bg-slate-100 text-slate-600",
+    borderColor: "border-t-blue-500",
+  },
+  {
+    emoji: "🚚",
+    value: "42",
+    label: "Pengiriman Aktif",
+    badge: "+3 hari ini",
+    badgeColor: "bg-amber-100 text-amber-700",
+    borderColor: "border-t-amber-500",
+  },
+  {
+    emoji: "⚡",
+    value: "1.2s",
+    label: "Rata-rata Waktu Analisis",
+    badge: "Dioptimalkan",
+    badgeColor: "bg-purple-100 text-purple-700",
+    borderColor: "border-t-purple-500",
+  },
+];
 
-  const supabase = await createClient();
-  let dbQuery = supabase
-    .from("messages")
-    .select("id, nama_lengkap, email, peran, pesan, created_at")
-    .order("created_at", { ascending: false });
-
-  if (query) {
-    dbQuery = dbQuery.ilike("nama_lengkap", `%${query}%`);
-  }
-
-  const { data: messages } = await dbQuery.limit(6);
-
+export default function DashboardPage() {
   return (
-    <div className="flex min-h-screen bg-[#f8f9fa] text-gray-800 font-sans w-full overflow-x-hidden">
-      <Sidebar />
+    <div className="p-8">
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold text-gray-900">Halaman Utama</h1>
+        <p className="text-gray-500 mt-1">Selamat datang kembali, Rahmat.</p>
+      </div>
 
-      <div className="flex-1 pl-0 md:pl-64 flex flex-col min-w-0 transition-all duration-300">
-        <header className="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-gray-100 bg-white/80 px-6 backdrop-blur-md">
-          <h1 className="text-lg font-bold tracking-tight text-[#1a3a2a]" style={{ fontFamily: "var(--font-judul)" }}>
-            Pusat Kontrol Sistem
-          </h1>
-          <span className="text-xs font-bold text-[#2d6a4f] bg-green-50 px-3 py-1.5 rounded-full border border-green-100 hidden sm:inline-flex">
-            Database Edge Terkoneksi
-          </span>
-        </header>
-
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 space-y-8 max-w-7xl w-full mx-auto">
-          
-          {/* PERBAIKAN: Menggunakan div, bukan section untuk menghindari CSS Bleeding */}
-          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            <MetricCardComponent card={{ id: "1", label: "Total Analisis Buah", value: "1,248", change: "+12% minggu ini", changeType: "up", icon: "🥑", accent: "green" }} />
-            <MetricCardComponent card={{ id: "2", label: "Akurasi Klasifikasi", value: "98.4%", change: "CNN Model v2.4", changeType: "neutral", icon: "🎯", accent: "blue" }} />
-            <MetricCardComponent card={{ id: "3", label: "Mitra Distributor", value: "42", change: "3 Wilayah Aktif", changeType: "up", icon: "🚚", accent: "amber" }} />
-            <MetricCardComponent card={{ id: "4", label: "Antrean Tiket", value: "7 Pesan", change: "Perlu ditanggapi", changeType: "down", icon: "🎫", accent: "red" }} />
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+        {stats.map((stat) => (
+          <div
+            key={stat.label}
+            className={`bg-white rounded-xl p-5 border-t-4 ${stat.borderColor} shadow-sm`}
+          >
+            <div className="text-2xl mb-3">{stat.emoji}</div>
+            <div className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</div>
+            <div className="text-gray-500 text-sm mb-3">{stat.label}</div>
+            <span className={`text-xs font-medium px-2 py-1 rounded-full ${stat.badgeColor}`}>
+              {stat.badge}
+            </span>
           </div>
+        ))}
+      </div>
 
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-            <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
-              <WeeklyBarChart />
-              <DonutChart />
-            </div>
-            <div className="space-y-6">
-              <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm"><QuickActions /></div>
-              <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm"><ActivityFeed /></div>
-            </div>
-          </div>
-
-          {/* PERBAIKAN: Menggunakan div untuk pembungkus fitur data */}
-          <div className="border-t border-gray-200 pt-8 space-y-6 mt-8">
-            <div className="sm:flex sm:items-center sm:justify-between">
-              <div>
-                <h2 className="text-xl font-bold text-gray-900">Manajemen Data & Tiket Kemitraan</h2>
-                <p className="text-sm text-gray-500">Kelola formulir masuk, filter pencarian URL State, dan UI Optimistis.</p>
+      {/* Recent Activity */}
+      <div className="bg-white rounded-xl p-6 shadow-sm">
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">Aktivitas Terbaru</h2>
+        <div className="space-y-3">
+          {[
+            { label: "Alpukat Hass — Matang (97.2%)", time: "2 menit lalu", status: "matang" },
+            { label: "Alpukat Mentega — Setengah Matang (84.1%)", time: "15 menit lalu", status: "setengah" },
+            { label: "Alpukat Hass — Mentah (91.8%)", time: "32 menit lalu", status: "mentah" },
+            { label: "Alpukat Hass — Matang (99.1%)", time: "1 jam lalu", status: "matang" },
+          ].map((item, i) => (
+            <div key={i} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
+              <div className="flex items-center gap-3">
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    item.status === "matang"
+                      ? "bg-green-500"
+                      : item.status === "setengah"
+                      ? "bg-amber-400"
+                      : "bg-red-400"
+                  }`}
+                />
+                <span className="text-sm text-gray-700">{item.label}</span>
               </div>
-              <div className="mt-4 sm:mt-0 w-full sm:w-64">
-                <SearchBar placeholder="Cari nama pengirim..." />
-              </div>
+              <span className="text-xs text-gray-400">{item.time}</span>
             </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              <div className="lg:col-span-4">
-                <ChatForm />
-              </div>
-              <div className="lg:col-span-8 bg-white rounded-3xl border border-gray-100 p-6 shadow-sm">
-                <Suspense fallback={<div className="animate-pulse h-32 bg-gray-100 rounded-xl"></div>}>
-                   {/* @ts-ignore - Data List expects standard payload */}
-                   <DataList items={messages || []} />
-                </Suspense>
-              </div>
-            </div>
-          </div>
-
-        </main>
+          ))}
+        </div>
       </div>
     </div>
   );
