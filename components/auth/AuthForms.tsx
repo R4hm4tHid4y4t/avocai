@@ -1,48 +1,46 @@
 'use client';
 
-import { useState, useTransition } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useFormState, useFormStatus } from 'react-dom';
+import { login, register } from '@/app/login/actions';
 
 interface Props {
   onSwitch: () => void;
 }
 
+// Komponen tombol terpisah untuk memantau status 'pending'
+function SubmitButton({ label, loadingLabel }: { label: string, loadingLabel: string }) {
+  const { pending } = useFormStatus();
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      style={{ ...styles.btnPrimary, opacity: pending ? 0.75 : 1, cursor: pending ? 'not-allowed' : 'pointer' }}
+    >
+      {pending ? loadingLabel : label}
+    </button>
+  );
+}
+
 /* ─── Login Form ─────────────────────────────────── */
 export function LoginForm({ onSwitch }: Props) {
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-  const [email, setEmail]       = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError]       = useState('');
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError('');
-    if (!email || !password) {
-      setError('Email dan password wajib diisi.');
-      return;
-    }
-    startTransition(() => {
-      router.push('/dashboard');
-    });
-  }
+  const [state, formAction] = useFormState(login, { success: false, message: '' });
 
   return (
-    <form onSubmit={handleSubmit} noValidate style={{ display:'flex', flexDirection:'column', gap:0 }}>
+    <form action={formAction} noValidate style={{ display:'flex', flexDirection:'column', gap:0 }}>
       <h2 className="animate-fade-up" style={styles.title}>Selamat datang 👋</h2>
       <p className="animate-fade-up delay-100" style={styles.subtitle}>Masuk ke akun AvocAI Anda</p>
 
-      {error && (
-        <div style={styles.errorBanner} role="alert">{error}</div>
+      {state?.message && !state.success && (
+        <div style={styles.errorBanner} role="alert">{state.message}</div>
       )}
 
       <div className="animate-fade-up delay-100">
-        <FormField label="Email">
+        <FormField label="Email / Username">
           <input
-            type="email"
-            placeholder="nama@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            name="email"
+            placeholder="admin atau nama@email.com"
             autoComplete="email"
             style={styles.input}
           />
@@ -53,14 +51,13 @@ export function LoginForm({ onSwitch }: Props) {
         <FormField
           label="Password"
           labelRight={
-            <button type="button" style={styles.forgotBtn}>Lupa password?</button>
+            <button type="button" style={styles.forgotBtn} onClick={() => alert('Fitur reset password sedang dalam tahap pengembangan.')}>Lupa password?</button>
           }
         >
           <input
             type="password"
+            name="password"
             placeholder="Masukkan password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
             style={styles.input}
           />
@@ -68,13 +65,7 @@ export function LoginForm({ onSwitch }: Props) {
       </div>
 
       <div className="animate-fade-up delay-200" style={{ marginTop:4 }}>
-        <button
-          type="submit"
-          disabled={isPending}
-          style={{ ...styles.btnPrimary, opacity:isPending ? 0.75 : 1, cursor:isPending ? 'not-allowed' : 'pointer' }}
-        >
-          {isPending ? 'Memverifikasi...' : 'Masuk ke AvocAI'}
-        </button>
+        <SubmitButton label="Masuk ke AvocAI" loadingLabel="Memverifikasi..." />
       </div>
 
       <Divider />
@@ -90,8 +81,7 @@ export function LoginForm({ onSwitch }: Props) {
 
 /* ─── Register Form ──────────────────────────────── */
 export function RegisterForm({ onSwitch }: Props) {
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
+  const [state, formAction] = useFormState(register, { success: false, message: '' });
   const [strength, setStrength] = useState(0);
 
   function checkStrength(val: string) {
@@ -102,30 +92,29 @@ export function RegisterForm({ onSwitch }: Props) {
     setStrength(score);
   }
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    startTransition(() => router.push('/dashboard'));
-  }
-
   const barClass = ['', 'weak', 'medium', 'strong'];
 
   return (
-    <form onSubmit={handleSubmit} noValidate style={{ display:'flex', flexDirection:'column', gap:0 }}>
+    <form action={formAction} noValidate style={{ display:'flex', flexDirection:'column', gap:0 }}>
       <h2 className="animate-fade-up" style={styles.title}>Buat akun baru ✨</h2>
       <p className="animate-fade-up delay-100" style={styles.subtitle}>Coba gratis 14 hari — tanpa kartu kredit</p>
 
+      {state?.message && !state.success && (
+        <div style={styles.errorBanner} role="alert">{state.message}</div>
+      )}
+
       <div className="animate-fade-up delay-100" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:14 }}>
         <FormField label="Nama Depan">
-          <input type="text" placeholder="Rahmat" autoComplete="given-name" style={styles.input} />
+          <input type="text" name="firstName" placeholder="Rahmat" autoComplete="given-name" style={styles.input} />
         </FormField>
         <FormField label="Nama Belakang">
-          <input type="text" placeholder="Hidayat" autoComplete="family-name" style={styles.input} />
+          <input type="text" name="lastName" placeholder="Hidayat" autoComplete="family-name" style={styles.input} />
         </FormField>
       </div>
 
       <div className="animate-fade-up delay-100">
         <FormField label="Email">
-          <input type="email" placeholder="nama@email.com" autoComplete="email" style={styles.input} />
+          <input type="email" name="email" placeholder="nama@email.com" autoComplete="email" style={styles.input} />
         </FormField>
       </div>
 
@@ -133,6 +122,7 @@ export function RegisterForm({ onSwitch }: Props) {
         <FormField label="Password">
           <input
             type="password"
+            name="password"
             placeholder="Buat password kuat"
             autoComplete="new-password"
             onChange={(e) => checkStrength(e.target.value)}
@@ -148,13 +138,7 @@ export function RegisterForm({ onSwitch }: Props) {
       </div>
 
       <div className="animate-fade-up delay-300" style={{ marginTop:4 }}>
-        <button
-          type="submit"
-          disabled={isPending}
-          style={{ ...styles.btnPrimary, opacity:isPending ? 0.75 : 1, cursor:isPending ? 'not-allowed' : 'pointer' }}
-        >
-          {isPending ? 'Membuat akun...' : 'Buat Akun Gratis →'}
-        </button>
+        <SubmitButton label="Buat Akun Gratis →" loadingLabel="Membuat akun..." />
       </div>
 
       <Divider />
@@ -206,6 +190,7 @@ function GoogleButton({ label }: { label: string }) {
   return (
     <button
       type="button"
+      onClick={() => alert('Integrasi OAuth Google segera hadir!')}
       style={styles.btnGoogle}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLButtonElement).style.background = '#f9f7f5';

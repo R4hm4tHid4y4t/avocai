@@ -1,73 +1,35 @@
-﻿"use client";
+﻿const integrations = [
+  { name: 'Supabase', desc: 'Database & Auth', status: 'Connected', icon: '⚡' },
+  { name: 'TensorFlow', desc: 'AI Model Engine', status: 'Active', icon: '🧠' },
+  { name: 'Vercel', desc: 'Deployment & Edge', status: 'Connected', icon: '▲' },
+];
 
 export default function IntegrationsPage() {
-  const apiKeys = [
-    { name: "Production Key", key: "avoc_live_a8f2", created: "12 Jan 2025" },
-    { name: "Staging Key", key: "avoc_test_c3d1", created: "5 Mar 2025" },
-  ];
-
   return (
-    <div className="p-8 max-w-3xl">
+    <div className="p-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Integrasi API</h1>
-        <p className="text-gray-500 mt-1">Kelola API key dan integrasi sistem eksternal.</p>
+        <h1 className="text-2xl font-bold text-gray-900">Integrations</h1>
+        <p className="text-gray-500">Hubungkan AvocAI dengan layanan eksternal.</p>
       </div>
 
-      <div className="bg-white rounded-xl p-6 shadow-sm mb-4">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-base font-semibold text-gray-900">API Key Aktif</h2>
-          <button className="bg-green-600 text-white text-sm font-medium px-3 py-1.5 rounded-lg hover:bg-green-700 transition-colors">
-            Generate Key Baru
-          </button>
-        </div>
-        <div className="space-y-3">
-          {apiKeys.map((apiKey) => (
-            <div
-              key={apiKey.name}
-              className="border border-gray-100 rounded-xl p-4 flex items-center justify-between"
-            >
-              <div>
-                <p className="font-medium text-gray-900 text-sm">{apiKey.name}</p>
-                <p className="font-mono text-xs text-gray-400 mt-0.5">{apiKey.key}</p>
-                <p className="text-xs text-gray-400 mt-1">Dibuat: {apiKey.created}</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {integrations.map((item) => (
+          <div key={item.name} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all">
+            <div className="flex justify-between items-start mb-4">
+              <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-2xl">
+                {item.icon}
               </div>
-              <div className="flex items-center gap-3">
-                <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
-                  Aktif
-                </span>
-                <button className="text-xs text-gray-400 hover:text-gray-600">Salin</button>
-                <button className="text-xs text-red-400 hover:text-red-600">Hapus</button>
-              </div>
+              <span className="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full">
+                {item.status}
+              </span>
             </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="bg-white rounded-xl p-6 shadow-sm mb-4">
-        <h2 className="text-base font-semibold text-gray-900 mb-3">Webhook</h2>
-        <p className="text-sm text-gray-500 mb-3">
-          Terima notifikasi real-time setiap hasil klasifikasi selesai.
-        </p>
-        <div className="flex gap-2">
-          <input
-            type="url"
-            placeholder="https://api.yourapp.com/webhook"
-            className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
-          />
-          <button className="bg-gray-900 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors whitespace-nowrap">
-            Simpan URL
-          </button>
-        </div>
-      </div>
-
-      <div className="bg-green-50 border border-green-100 rounded-xl p-5">
-        <p className="text-sm font-semibold text-green-800 mb-1">Dokumentasi API</p>
-        <p className="text-sm text-green-700">
-          Pelajari cara mengintegrasikan AvocAI ke dalam sistem Anda.
-        </p>
-        <a href="#" className="inline-block mt-3 text-sm font-medium text-green-700 hover:text-green-800 underline">
-          Buka Docs
-        </a>
+            <h3 className="font-bold text-gray-900">{item.name}</h3>
+            <p className="text-sm text-gray-500 mb-6">{item.desc}</p>
+            <button className="w-full py-2 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-lg text-sm font-semibold transition-colors">
+              Configure
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,26 +1,14 @@
-export const dynamic = "force-dynamic";
-
-import type { Metadata } from "next";
 import Sidebar from "@/components/dashboard/Sidebar";
 
-export const metadata: Metadata = {
-  title: {
-    template: "%s | AvocAI Dashboard",
-    default: "Dashboard | AvocAI",
-  },
-  description: "Platform klasifikasi kematangan alpukat berbasis AI",
-};
-
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-screen overflow-hidden bg-[#f5ede8]">
+    <div className="flex h-screen bg-[#F9FAFB] overflow-hidden">
       <Sidebar />
       <main className="flex-1 overflow-y-auto">
-        {children}
+        {/* Container dengan max-width agar konten tidak terlalu melebar di layar besar */}
+        <div className="max-w-[1440px] mx-auto">
+          {children}
+        </div>
       </main>
     </div>
   );

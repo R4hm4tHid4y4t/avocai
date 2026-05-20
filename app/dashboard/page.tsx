@@ -39,7 +39,7 @@ const stats = [
 
 export default function DashboardPage() {
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8 max-w-7xl mx-auto animate-fade-in">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Halaman Utama</h1>
         <p className="text-gray-500 mt-1">Selamat datang kembali, Rahmat.</p>
@@ -50,7 +50,7 @@ export default function DashboardPage() {
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className={`bg-white rounded-xl p-5 border-t-4 ${stat.borderColor} shadow-sm`}
+            className={`bg-white rounded-xl p-5 border-t-4 ${stat.borderColor} shadow-sm transition-transform hover:-translate-y-1 hover:shadow-md cursor-default`}
           >
             <div className="text-2xl mb-3">{stat.emoji}</div>
             <div className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</div>
@@ -63,16 +63,16 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-white rounded-xl p-6 shadow-sm">
+      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Aktivitas Terbaru</h2>
         <div className="space-y-3">
           {[
-            { label: "Alpukat Hass — Matang (97.2%)", time: "2 menit lalu", status: "matang" },
-            { label: "Alpukat Mentega — Setengah Matang (84.1%)", time: "15 menit lalu", status: "setengah" },
-            { label: "Alpukat Hass — Mentah (91.8%)", time: "32 menit lalu", status: "mentah" },
-            { label: "Alpukat Hass — Matang (99.1%)", time: "1 jam lalu", status: "matang" },
+            { label: "Alpukat Miki — Matang (97.2%)", time: "2 menit lalu", status: "matang" },
+            { label: "Alpukat Aligator — Setengah Matang (84.1%)", time: "15 menit lalu", status: "setengah" },
+            { label: "Alpukat Miki — Mentah (91.8%)", time: "32 menit lalu", status: "mentah" },
+            { label: "Alpukat Miki — Terlalu Matang (99.1%)", time: "1 jam lalu", status: "terlalu" },
           ].map((item, i) => (
-            <div key={i} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
+            <div key={i} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors rounded-lg px-2 -mx-2">
               <div className="flex items-center gap-3">
                 <span
                   className={`w-2 h-2 rounded-full ${
@@ -80,10 +80,12 @@ export default function DashboardPage() {
                       ? "bg-green-500"
                       : item.status === "setengah"
                       ? "bg-amber-400"
-                      : "bg-red-400"
+                      : item.status === "mentah"
+                      ? "bg-slate-400"
+                      : "bg-red-500"
                   }`}
                 />
-                <span className="text-sm text-gray-700">{item.label}</span>
+                <span className="text-sm text-gray-700 font-medium">{item.label}</span>
               </div>
               <span className="text-xs text-gray-400">{item.time}</span>
             </div>
