@@ -161,32 +161,40 @@ git push origin main
 
 # 🥑 AvocAI Dashboard
 
-> **Sistem Deteksi Tingkat Kematangan Buah Alpukat Berbasis Algoritma Convolutional Neural Network (CNN)**
+> **Sistem Deteksi Varietas dan Tingkat Kematangan Buah Alpukat Berbasis Algoritma Convolutional Neural Network (CNN)**
 
-AvocAI adalah platform *Software as a Service* (SaaS) berbasis web yang dirancang untuk mengklasifikasikan varietas dan tingkat kematangan buah alpukat secara instan. Menggunakan arsitektur Convolutional Neural Network (CNN), sistem ini membantu mengoptimalkan proses pemilahan pasca-panen dengan cepat, akurat, dan efisien.
+AvocAI adalah platform *Software as a Service* (SaaS) berbasis web yang dirancang untuk mengklasifikasikan varietas dan tingkat kematangan buah alpukat secara instan dalam satu kali proses inferensi. Menggunakan arsitektur Convolutional Neural Network (CNN), sistem ini membantu mengoptimalkan proses pemilahan pasca-panen dengan cepat, akurat, dan efisien untuk kebutuhan industri agritech.
 
 ---
 
 ## ✨ Fitur Utama
 
-* **🧠 Klasifikasi AI Instan:** Mengunggah gambar alpukat dan mendapatkan hasil inferensi tingkat kematangan secara *real-time* dengan model CNN.
-* **📊 Analitik & Visualisasi:** Dasbor interaktif yang melacak performa model, akurasi rata-rata, dan statistik deteksi harian.
-* **🔐 Autentikasi Aman:** Sistem *login* dan *register* yang dilindungi oleh Next.js Middleware dan dieksekusi melalui *Server Actions*.
-* **📱 UI/UX Modern:** Antarmuka responsif level *enterprise* yang dibangun menggunakan Tailwind CSS, dilengkapi animasi mulus (*animate-fade-in*) dan desain *glassmorphism*.
-* **💳 Manajemen Langganan (Billing):** Simulasi pelacakan penggunaan API klasifikasi dan paket *Pro Plan*.
+* **🧠 Klasifikasi Multi-Kelas AI Instan:** Mengunggah foto buah untuk mengekstrak fitur fisik guna mendeteksi jenis varietas sekaligus fase kematangan secara *real-time*.
+* **📊 Analitik & Visualisasi:** Dasbor interaktif yang melacak performa model, akurasi rata-rata, dan statistik distribusi hasil klasifikasi harian.
+* **🔐 Autentikasi Aman:** Sistem *login* dan *register* yang dilindungi oleh Next.js Middleware dan dieksekusi secara efisien melalui *Server Actions*.
+* **📱 UI/UX Modern:** Antarmuka responsif level *enterprise* yang dibangun menggunakan Tailwind CSS, dilengkapi animasi mulus (*animate-fade-in*) dan tata letak simetris (*centered layout*).
+* **💳 Manajemen Langganan (Billing):** Simulasi pelacakan penggunaan kuota API klasifikasi dan pengelolaan paket *Pro Plan*.
 
 ---
 
-## 🥑 Kategori Kematangan Algoritma
+## 🤖 Cakupan Klasifikasi Model CNN
 
-Sistem klasifikasi ini dilatih untuk mengidentifikasi 4 fase utama pasca-panen buah alpukat:
+Model cerdas pada sistem AvocAI dilatih secara khusus untuk mengenali kombinasi dari varietas buah dan karakteristik fisik luar sebagai berikut:
 
-| Status | Indikator Visual | Deskripsi | Rekomendasi |
+### 1. Klasifikasi Varietas Buah
+Sistem mampu mengidentifikasi 2 jenis varietas alpukat unggulan yang paling banyak dibudidayakan:
+* **Alpukat Miki:** Karakteristik buah cenderung bulat, ukuran sedang, dengan permukaan kulit yang relatif halus.
+* **Alpukat Aligator:** Karakteristik bentuk buah memanjang (berbentuk seperti gada), berukuran besar, dengan tekstur kulit yang cenderung lebih bergelombang.
+
+### 2. Kategori Tingkat Kematangan Pasca-Panen
+Fase kematangan dibagi menjadi 4 tingkatan baku yang dilengkapi dengan indikator warna sistem:
+
+| Status | Indikator Visual | Deskripsi Karakteristik | Rekomendasi Tindakan |
 | :--- | :--- | :--- | :--- |
-| ⚪ **Mentah** | Abu-abu / Slate | Tekstur sangat keras, warna kulit belum merata. | Belum siap panen / tunggu beberapa hari. |
-| 🟡 **Setengah Matang** | Kuning / Amber | Mulai sedikit melunak, namun belum sempurna. | Peram 2-3 hari lagi di suhu ruang. |
-| 🟢 **Matang** | Hijau / Green | Tekstur lembut ideal, siap dikupas. | Kondisi paling optimal untuk dikonsumsi. |
-| 🔴 **Terlalu Matang** | Merah / Red | Sangat lunak, kulit cenderung gelap/rusak. | Sangat cocok diolah menjadi jus atau *smoothie*. |
+| ⚪ **Mentah** | Abu-abu / Slate | Tekstur sangat keras, kandungan pati tinggi, warna kulit hijau terang merata. | Belum siap panen / lakukan proses penyimpanan lebih lanjut. |
+| 🟡 **Setengah Matang** | Kuning / Amber | Buah mulai sedikit melunak di beberapa bagian, namun belum merata sempurna. | Peram selama 2-3 hari lagi pada suhu ruang. |
+| 🟢 **Matang** | Hijau / Green | Tekstur lembut ideal saat ditekan perlahan, aroma khas keluar, siap dikupas. | Kondisi paling optimal untuk konsumsi langsung atau distribusi pasar. |
+| 🔴 **Terlalu Matang** | Merah / Red | Tekstur sangat lunak, kulit cenderung gelap. | Memiliki tingkat kemanisan tertinggi, sangat cocok diolah menjadi jus/smoothie. |
 
 ---
 
@@ -198,7 +206,7 @@ Proyek ini dibangun menggunakan *stack* teknologi web modern:
 * **Bahasa Pemrograman:** TypeScript & JavaScript
 * **Desain Antarmuka:** [Tailwind CSS v3](https://tailwindcss.com/)
 * **Deployment & Infrastruktur:** [Vercel](https://vercel.com/)
-* **Keamanan:** Next.js Middleware untuk proteksi rute halaman
+* **Keamanan Rute:** Next.js Middleware untuk proteksi hak akses halaman dasbor
 
 ---
 

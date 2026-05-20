@@ -11,10 +11,14 @@ const RESULTS = [
   { label: "Terlalu Matang", color: "bg-red-500", desc: "Tekstur sangat lunak, sangat cocok untuk diolah menjadi jus.", textColor: "text-red-700" },
 ];
 
+// Tambahan: Daftar Varietas yang didukung model CNN
+const VARIETIES = ["Miki", "Aligator"];
+
 export default function ClassifyPage() {
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<null | typeof RESULTS[0] & { confidence: number }>(null);
+  // Tambahkan 'variety' ke dalam state hasil
+  const [result, setResult] = useState<null | typeof RESULTS[0] & { confidence: number; variety: string }>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFile = (file: File) => {
@@ -25,8 +29,15 @@ export default function ClassifyPage() {
     
     // Simulasi waktu proses algoritma CNN
     setTimeout(() => {
-      const pick = RESULTS[Math.floor(Math.random() * RESULTS.length)]; 
-      setResult({ ...pick, confidence: 85 + Math.random() * 14 });
+      // Mengacak kematangan dan varietas
+      const pickRipeness = RESULTS[Math.floor(Math.random() * RESULTS.length)]; 
+      const pickVariety = VARIETIES[Math.floor(Math.random() * VARIETIES.length)]; 
+      
+      setResult({ 
+        ...pickRipeness, 
+        confidence: 85 + Math.random() * 14,
+        variety: pickVariety // Menyimpan varietas ke hasil
+      });
       setLoading(false);
     }, 2500);
   };
@@ -41,7 +52,7 @@ export default function ClassifyPage() {
     <div className="p-4 md:p-8 max-w-6xl mx-auto animate-fade-in">
       <header className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Klasifikasi AI</h1>
-        <p className="text-gray-500 mt-1">Deteksi tingkat kematangan alpukat secara instan menggunakan arsitektur CNN.</p>
+        <p className="text-gray-500 mt-1">Deteksi varietas dan tingkat kematangan alpukat secara instan menggunakan arsitektur CNN.</p>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -122,11 +133,19 @@ export default function ClassifyPage() {
             <div className="flex-1 flex flex-col animate-fade-in">
               <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 mb-6">
                 <p className="text-sm text-gray-500 mb-1 font-medium">Hasil Prediksi</p>
-                <div className="flex items-center gap-3">
-                  <span className={`w-3 h-3 rounded-full ${result.color} animate-pulse`} />
-                  <span className={`text-3xl font-black tracking-tight ${result.textColor}`}>{result.label}</span>
+                
+                {/* Bagian ini diperbarui untuk menampilkan Varietas dan Kematangan */}
+                <div className="flex items-start gap-3 mt-1">
+                  <span className={`w-3 h-3 mt-2.5 rounded-full ${result.color} animate-pulse`} />
+                  <div className="flex flex-col">
+                    <span className={`text-3xl font-black tracking-tight ${result.textColor}`}>{result.label}</span>
+                    <span className="text-sm font-semibold text-gray-600 mt-1">
+                      Varietas: <span className="text-gray-900 bg-white px-2 py-0.5 rounded-md border border-gray-200">Alpukat {result.variety}</span>
+                    </span>
+                  </div>
                 </div>
-                <p className="text-gray-600 mt-3 font-medium leading-relaxed">{result.desc}</p>
+                
+                <p className="text-gray-600 mt-4 font-medium leading-relaxed">{result.desc}</p>
               </div>
               
               <div className="mb-8">
