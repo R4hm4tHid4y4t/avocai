@@ -1,6 +1,15 @@
-"use client";
+﻿"use client";
 
 export default function ProfilePage() {
+  const fields = [
+    { label: "Nama Lengkap", value: "Rahmat Hidayat", type: "text" },
+    { label: "Email", value: "rahmat@avocai.id", type: "email" },
+    { label: "Nomor Telepon", value: "+62 812-3456-7890", type: "tel" },
+    { label: "Perusahaan", value: "AvocAI Indonesia", type: "text" },
+  ];
+
+  const passwordFields = ["Password Lama", "Password Baru", "Konfirmasi Password"];
+
   return (
     <div className="p-8 max-w-2xl">
       <div className="mb-8">
@@ -10,12 +19,12 @@ export default function ProfilePage() {
 
       <div className="bg-white rounded-xl p-6 shadow-sm mb-4">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-[#1e3a1e] flex items-center justify-center text-white text-xl font-bold">
+          <div className="w-16 h-16 rounded-full bg-green-900 flex items-center justify-center text-white text-xl font-bold">
             RH
           </div>
           <div>
             <p className="font-semibold text-gray-900">Rahmat Hidayat</p>
-            <p className="text-sm text-gray-500">Pro Plan • Bergabung Januari 2025</p>
+            <p className="text-sm text-gray-500">Pro Plan</p>
           </div>
           <button className="ml-auto text-sm text-green-600 hover:text-green-700 font-medium">
             Ganti Foto
@@ -26,12 +35,7 @@ export default function ProfilePage() {
       <div className="bg-white rounded-xl p-6 shadow-sm mb-4">
         <h2 className="text-base font-semibold text-gray-900 mb-4">Informasi Dasar</h2>
         <div className="space-y-4">
-          {[
-            { label: "Nama Lengkap", value: "Rahmat Hidayat", type: "text" },
-            { label: "Email", value: "rahmat@avocai.id", type: "email" },
-            { label: "Nomor Telepon", value: "+62 812-3456-7890", type: "tel" },
-            { label: "Perusahaan", value: "AvocAI Indonesia", type: "text" },
-          ].map((field) => (
+          {fields.map((field) => (
             <div key={field.label}>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 {field.label}
@@ -52,14 +56,14 @@ export default function ProfilePage() {
       <div className="bg-white rounded-xl p-6 shadow-sm">
         <h2 className="text-base font-semibold text-gray-900 mb-4">Keamanan</h2>
         <div className="space-y-3">
-          {["Password Lama", "Password Baru", "Konfirmasi Password"].map((label) => (
+          {passwordFields.map((label) => (
             <div key={label}>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 {label}
               </label>
               <input
                 type="password"
-                placeholder="••••••••"
+                placeholder="********"
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
               />
             </div>
