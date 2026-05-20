@@ -1,6 +1,4 @@
-import type { Metadata } from "next";
-
-export const metadata: Metadata = { title: "Profil" };
+"use client";
 
 export default function ProfilePage() {
   return (
@@ -10,7 +8,6 @@ export default function ProfilePage() {
         <p className="text-gray-500 mt-1">Kelola informasi akun Anda.</p>
       </div>
 
-      {/* Avatar Section */}
       <div className="bg-white rounded-xl p-6 shadow-sm mb-4">
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 rounded-full bg-[#1e3a1e] flex items-center justify-center text-white text-xl font-bold">
@@ -26,7 +23,6 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Profile Form */}
       <div className="bg-white rounded-xl p-6 shadow-sm mb-4">
         <h2 className="text-base font-semibold text-gray-900 mb-4">Informasi Dasar</h2>
         <div className="space-y-4">
@@ -37,7 +33,9 @@ export default function ProfilePage() {
             { label: "Perusahaan", value: "AvocAI Indonesia", type: "text" },
           ].map((field) => (
             <div key={field.label}>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{field.label}</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {field.label}
+              </label>
               <input
                 type={field.type}
                 defaultValue={field.value}
@@ -51,13 +49,14 @@ export default function ProfilePage() {
         </button>
       </div>
 
-      {/* Change Password */}
       <div className="bg-white rounded-xl p-6 shadow-sm">
         <h2 className="text-base font-semibold text-gray-900 mb-4">Keamanan</h2>
         <div className="space-y-3">
           {["Password Lama", "Password Baru", "Konfirmasi Password"].map((label) => (
             <div key={label}>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {label}
+              </label>
               <input
                 type="password"
                 placeholder="••••••••"

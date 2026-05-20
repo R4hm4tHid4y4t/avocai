@@ -1,6 +1,4 @@
-import type { Metadata } from "next";
-
-export const metadata: Metadata = { title: "Riwayat Scan" };
+"use client";
 
 const historyData = [
   { id: "SC-001248", jenis: "Alpukat Hass", hasil: "Matang", conf: 97.2, waktu: "2025-05-19 14:23", ukuran: "245g", status: "matang" },
@@ -73,8 +71,12 @@ export default function HistoryPage() {
         <div className="px-4 py-3 border-t border-gray-100 flex items-center justify-between text-sm text-gray-400">
           <span>Menampilkan 7 dari 1,248 hasil</span>
           <div className="flex gap-2">
-            <button className="px-3 py-1 rounded border border-gray-200 hover:bg-gray-50 transition-colors">← Prev</button>
-            <button className="px-3 py-1 rounded border border-gray-200 hover:bg-gray-50 transition-colors">Next →</button>
+            <button className="px-3 py-1 rounded border border-gray-200 hover:bg-gray-50 transition-colors">
+              ← Prev
+            </button>
+            <button className="px-3 py-1 rounded border border-gray-200 hover:bg-gray-50 transition-colors">
+              Next →
+            </button>
           </div>
         </div>
       </div>
