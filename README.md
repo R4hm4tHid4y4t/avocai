@@ -156,3 +156,79 @@ git push origin main
 ## Kredensial Admin
 - Username: `admin`
 - Password: `avocai2026`
+
+# Tugas Modul 10 — The Grand Launch: Final Release
+
+# 🥑 AvocAI Dashboard
+
+> **Sistem Deteksi Tingkat Kematangan Buah Alpukat Berbasis Algoritma Convolutional Neural Network (CNN)**
+
+AvocAI adalah platform *Software as a Service* (SaaS) berbasis web yang dirancang untuk mengklasifikasikan varietas dan tingkat kematangan buah alpukat secara instan. Menggunakan arsitektur Convolutional Neural Network (CNN), sistem ini membantu mengoptimalkan proses pemilahan pasca-panen dengan cepat, akurat, dan efisien.
+
+---
+
+## ✨ Fitur Utama
+
+* **🧠 Klasifikasi AI Instan:** Mengunggah gambar alpukat dan mendapatkan hasil inferensi tingkat kematangan secara *real-time* dengan model CNN.
+* **📊 Analitik & Visualisasi:** Dasbor interaktif yang melacak performa model, akurasi rata-rata, dan statistik deteksi harian.
+* **🔐 Autentikasi Aman:** Sistem *login* dan *register* yang dilindungi oleh Next.js Middleware dan dieksekusi melalui *Server Actions*.
+* **📱 UI/UX Modern:** Antarmuka responsif level *enterprise* yang dibangun menggunakan Tailwind CSS, dilengkapi animasi mulus (*animate-fade-in*) dan desain *glassmorphism*.
+* **💳 Manajemen Langganan (Billing):** Simulasi pelacakan penggunaan API klasifikasi dan paket *Pro Plan*.
+
+---
+
+## 🥑 Kategori Kematangan Algoritma
+
+Sistem klasifikasi ini dilatih untuk mengidentifikasi 4 fase utama pasca-panen buah alpukat:
+
+| Status | Indikator Visual | Deskripsi | Rekomendasi |
+| :--- | :--- | :--- | :--- |
+| ⚪ **Mentah** | Abu-abu / Slate | Tekstur sangat keras, warna kulit belum merata. | Belum siap panen / tunggu beberapa hari. |
+| 🟡 **Setengah Matang** | Kuning / Amber | Mulai sedikit melunak, namun belum sempurna. | Peram 2-3 hari lagi di suhu ruang. |
+| 🟢 **Matang** | Hijau / Green | Tekstur lembut ideal, siap dikupas. | Kondisi paling optimal untuk dikonsumsi. |
+| 🔴 **Terlalu Matang** | Merah / Red | Sangat lunak, kulit cenderung gelap/rusak. | Sangat cocok diolah menjadi jus atau *smoothie*. |
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+Proyek ini dibangun menggunakan *stack* teknologi web modern:
+
+* **Framework Utama:** [Next.js 14+](https://nextjs.org/) (App Router, Server Actions)
+* **Bahasa Pemrograman:** TypeScript & JavaScript
+* **Desain Antarmuka:** [Tailwind CSS v3](https://tailwindcss.com/)
+* **Deployment & Infrastruktur:** [Vercel](https://vercel.com/)
+* **Keamanan:** Next.js Middleware untuk proteksi rute halaman
+
+---
+
+## 🚀 Panduan Instalasi (Local Development)
+
+Untuk menjalankan proyek ini secara lokal di mesin Anda, ikuti langkah-langkah berikut:
+
+1. **Kloning Repositori**
+   ```bash
+   git clone [https://github.com/r4hm4thid4y4t/avocai.git](https://github.com/r4hm4thid4y4t/avocai.git)
+   cd avocai
+Instalasi Dependensi
+Pastikan Anda menggunakan Node.js versi terbaru, lalu jalankan:
+
+Bash
+npm install
+Jalankan Server Mode Pengembangan
+
+Bash
+npm run dev
+Akses Aplikasi
+Buka http://localhost:3000 di peramban (browser) Anda.
+
+(Catatan: Anda dapat masuk ke dasbor menggunakan kombinasi kredensial uji coba: Email admin@avocai.id dan Password avocai2026).
+
+👨‍💻 Pengembang Utama
+Proyek ini dikembangkan sebagai prototipe sistem cerdas yang mengintegrasikan Machine Learning ke dalam ekosistem aplikasi web modern.
+
+Rahmat Hidayat Mahasiswa Program Studi D4 Teknologi Rekayasa Perangkat Lunak
+
+Politeknik Negeri Padang
+
+© 2026 AvocAI Project. All rights reserved.
