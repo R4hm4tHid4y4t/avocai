@@ -210,25 +210,26 @@ Untuk menjalankan proyek ini secara lokal di mesin Anda, ikuti langkah-langkah b
    ```bash
    git clone [https://github.com/r4hm4thid4y4t/avocai.git](https://github.com/r4hm4thid4y4t/avocai.git)
    cd avocai
-Instalasi Dependensi
-Pastikan Anda menggunakan Node.js versi terbaru, lalu jalankan:
 
-Bash
-npm install
-Jalankan Server Mode Pengembangan
+2. **Instalasi Dependensi**
+    **Pastikan Anda menggunakan Node.js versi terbaru, lalu jalankan:**
+    ```bash
+    npm install
+    
+3.  **Jalankan Server Mode Pengembangan**
+    ```bash
+    npm run dev
 
-Bash
-npm run dev
-Akses Aplikasi
-Buka http://localhost:3000 di peramban (browser) Anda.
+4.  **Akses Aplikasi**
+    **Buka http://localhost:3000 di peramban (browser) Anda.**
 
-(Catatan: Anda dapat masuk ke dasbor menggunakan kombinasi kredensial uji coba: Email admin@avocai.id dan Password avocai2026).
+**(Catatan: Anda dapat masuk ke dasbor menggunakan kombinasi kredensial uji coba: Email admin@avocai.id dan Password avocai2026).**
 
-👨‍💻 Pengembang Utama
-Proyek ini dikembangkan sebagai prototipe sistem cerdas yang mengintegrasikan Machine Learning ke dalam ekosistem aplikasi web modern.
+**👨‍💻 Pengembang Utama**
+**Proyek ini dikembangkan sebagai prototipe sistem cerdas yang mengintegrasikan Machine Learning ke dalam ekosistem aplikasi web modern.**
 
-Rahmat Hidayat Mahasiswa Program Studi D4 Teknologi Rekayasa Perangkat Lunak
+**Rahmat Hidayat Mahasiswa Program Studi D4 Teknologi Rekayasa Perangkat Lunak**
 
-Politeknik Negeri Padang
+**Politeknik Negeri Padang**
 
-© 2026 AvocAI Project. All rights reserved.
+**© 2026 AvocAI Project. All rights reserved.**
